@@ -1,0 +1,278 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with`a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+%\title{Your Paper}
+%\author{You}
+
+\begin{document}
+\title{Xe129 - Rb87 Spin Exchange Optical Pumping dynamics}
+\maketitle
+
+
+% \begin{abstract}
+% Your abstract.
+% \end{abstract}
+
+\section{Bloch equations}
+The Block equation for the Xe spin are
+
+\begin{align}
+    \frac{d \mathbf{K}}{d t} &= -\left[\gamma_{Xe}\left( \mathbf{B}_0 + \mathbf{B}_d \cos{(\omega_{rf} t)}\right) + b_{KS} \mathbf{S}\right] \times\mathbf{K}  +\Gamma_{se} \left( \mathbf{S} - \mathbf{K}\right) - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{K}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{K}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{K}\right)
+\end{align}
+
+Let us assume that $b_{KS} \mathbf{S}$ is part of the DC field $\mathbf{B}_0=B_0 \hat{z}$, that $\Gamma_{se} \left( \mathbf{S} - \mathbf{K}\right)=\left(\begin{array}{c}0\\0\\R_{se}\end{array}\right)$ and that the drive is $$\mathbf{B}_d \cos{(\omega_{rf} t)} =B_d \cos{(\omega_{rf} t)}\hat{x}$$ .
+
+Thus, we end up with the next Bloch equation
+\begin{align}
+    \frac{d \mathbf{K}}{d t} &= -\left[\gamma_{Xe}\left( B_0\hat{z} + B_d \cos{(\omega_{rf} t)}\hat{x}\right) \right] \times\mathbf{K}  +R_{se}\hat{z} - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{K}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{K}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{K}\right)\\
+    &= -\gamma_{Xe} \begin{vmatrix}
+        \hat{x}                     & \hat{y}       & \hat{z} \\
+         B_d\cos{(\omega_{rf} t)}   & 0             & B_0  \\
+         K_x                        & K_y           & K_z
+    \end{vmatrix} + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right) - 
+    \left(\begin{matrix}
+    \Gamma_2  &  0  &0\\
+    0  &  \Gamma_2  &  0\\
+    0  &  0  &  \Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{matrix}
+    K_x\\
+    K_y\\
+    K_z
+    \end{matrix}\right)\\
+    &= - \gamma_{Xe} 
+    \left(\begin{matrix}
+    -B_0 K_y\\
+    B_0 K_x - B_d \cos{(\omega_{rf} t)} K_z\\
+    B_d \cos{(\omega_{rf} t)} K_y
+    \end{matrix}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right) - 
+    \left(\begin{matrix}
+    \Gamma_2  &  0  &0\\
+    0  &  \Gamma_2  &  0\\
+    0  &  0  &  \Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{matrix}
+    K_x\\
+    K_y\\
+    K_z
+    \end{matrix}\right)\\
+    &=  
+    \left(\begin{matrix}
+    -\Gamma_2               &  \gamma_{Xe}B_0                        &  0                                    \\
+    -\gamma_{Xe}B_0         &  -\Gamma_2                             &  \gamma_{Xe}B_d \cos{(\omega_{rf} t)} \\
+    0                       &  -\gamma_{Xe}B_d \cos{(\omega_{rf} t)} &  -\Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{matrix}
+    K_x\\
+    K_y\\
+    K_z
+    \end{matrix}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+    &=  
+    \left(\begin{matrix}
+    -\Gamma_2               &  \omega_0                        &  0                              \\
+    -\omega_0               &  -\Gamma_2                       &  \Omega_d \cos{(\omega_{rf} t)} \\
+    0                       &  -\Omega_d \cos{(\omega_{rf} t)} &  -\Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{matrix}
+    K_x\\
+    K_y\\
+    K_z
+    \end{matrix}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)
+\end{align}
+
+Finally, the Xe NMR dynamics can be described by the next Bloch equations
+
+\begin{align}
+    \left(\begin{matrix}
+    \dot{K_x}\\
+    \dot{K_y}\\
+    \dot{K_z}
+    \end{matrix}\right)
+    &=  
+    \left(\begin{matrix}
+    -\Gamma_2               &  \omega_0                        &  0                              \\
+    -\omega_0               &  -\Gamma_2                       &  \Omega_d \cos{(\omega_{rf} t)} \\
+    0                       &  -\Omega_d \cos{(\omega_{rf} t)} &  -\Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{matrix}
+    K_x\\
+    K_y\\
+    K_z
+    \end{matrix}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)
+\end{align}
+
+
+Now, let us move to the rotating frame (frame of Xe) using the next transformation
+
+\begin{align}
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)	&=\left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        \sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)\left(\begin{array}{c}
+        K_{x}\\
+        K_{y}\\
+        K_{z}
+    \end{array}\right)\\
+    \left(\begin{array}{c}
+        K_{x}\\
+        K_{y}\\
+        K_{z}
+    \end{array}\right)	&=\left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+\end{align}
+
+Also, the derivative with respect to time of the transformation is
+\begin{align}
+    \left(\begin{array}{c}
+        \dot{K_{x}}\\
+        \dot{K_{y}}\\
+        \dot{K_{z}}
+    \end{array}\right)	&=\frac{d}{dt}\left[\left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)\right]\\ 
+    &=\frac{d}{dt}\left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)\\
+    &=\omega_{0}\left(\begin{array}{ccc}
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        -\cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+\end{align}
+
+
+
+
+
+
+
+
+
+
+The Bloch equations transform as follows
+\tiny
+\begin{align}
+    \frac{d}{dt}
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=  
+    \left(\begin{matrix}
+    -\Gamma_2               &  \omega_0                        &  0                              \\
+    -\omega_0               &  -\Gamma_2                       &  \Omega_d \cos{(\omega_{rf} t)} \\
+    0                       &  -\Omega_d \cos{(\omega_{rf} t)} &  -\Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)
+\end{align}
+\normalsize
+
+
+
+
+\end{document}
