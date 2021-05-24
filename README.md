@@ -1,4 +1,4 @@
-# SOEP-and-NMR
+# SEOP-and-NMR
 
 ## TODO
 
