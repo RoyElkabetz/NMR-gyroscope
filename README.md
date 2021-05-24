@@ -3,8 +3,9 @@
 ## TODO
 
 ### Repository structure
-- [ ] Add requirements.txt
-- [ ] Add a utils.py file
+#### 24/05/2021
+- [x] Add requirements.txt
+- [x] Add a utils.py file
 
 ### Theory
 - [ ] Write solution to open loop single species NMRG dynamics.
