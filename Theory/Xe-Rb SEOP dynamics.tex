@@ -207,8 +207,9 @@ Also, the derivative with respect to time of the transformation is
     &=\omega_{0}\left(\begin{array}{ccc}
         -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
         -\cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
-        0 & 0 & 1
-    \end{array}\right)\left(\begin{array}{c}
+        0 & 0 & 0
+    \end{array}\right)
+    \left(\begin{array}{c}
         \tilde{K}_{x}\\
         \tilde{K}_{y}\\
         \tilde{K}_{z}
@@ -227,28 +228,30 @@ Also, the derivative with respect to time of the transformation is
 
 
 
-
-
-
-
-
-
-
 The Bloch equations transform as follows
-\tiny
+
 \begin{align}
-    \frac{d}{dt}
-    \left(\begin{array}{ccc}
-        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+    \omega_{0}\left(\begin{array}{ccc}
         -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
-        0 & 0 & 1
+        -\cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        0 & 0 & 0
     \end{array}\right)
     \left(\begin{array}{c}
         \tilde{K}_{x}\\
         \tilde{K}_{y}\\
         \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
     \end{array}\right)
-    &=  
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=\\ 
     \left(\begin{matrix}
     -\Gamma_2               &  \omega_0                        &  0                              \\
     -\omega_0               &  -\Gamma_2                       &  \Omega_d \cos{(\omega_{rf} t)} \\
@@ -263,14 +266,439 @@ The Bloch equations transform as follows
         \tilde{K}_{x}\\
         \tilde{K}_{y}\\
         \tilde{K}_{z}
+    \end{array}\right) &+ 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+    % new line
+    \omega_{0}
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        \sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{array}{ccc}
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        -\cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        0 & 0 & 0
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
     \end{array}\right) + 
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=\\ 
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        \sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{matrix}
+    -\Gamma_2               &  \omega_0                        &  0                              \\
+    -\omega_0               &  -\Gamma_2                       &  \Omega_d \cos{(\omega_{rf} t)} \\
+    0                       &  -\Omega_d \cos{(\omega_{rf} t)} &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) &+ 
     \left(\begin{matrix}
          0  \\
          0  \\
          R_{se} 
     \end{matrix}\right)
 \end{align}
-\normalsize
+
+Let us compute it separately term by term
+
+\begin{align}
+    \omega_{0}
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        \sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{array}{ccc}
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        -\cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        0 & 0 & 0
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)&= 
+    \omega_{0}
+    \left(\begin{array}{ccc}
+       0 & 1 & 0\\
+       -1 & 0 & 0\\
+        0 & 0 & 0
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)\\
+    &=
+    \omega_{0}
+    \left(\begin{array}{c}
+        \tilde{K}_{y}\\
+        -\tilde{K}_{x}\\
+        0
+    \end{array}\right)
+\end{align}
+
+Also,
+
+\begin{align}
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        \sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{matrix}
+    -\Gamma_2               &  \omega_0                        &  0                              \\
+    -\omega_0               &  -\Gamma_2                       &  \Omega_d \cos{(\omega_{rf} t)} \\
+    0                       &  -\Omega_d \cos{(\omega_{rf} t)} &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & \sin(\omega_{0}t) & 0\\
+        -\sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right) &=\\
+    \left(\begin{array}{ccc}
+        \cos(\omega_{0}t) & -\sin(\omega_{0}t) & 0\\
+        \sin(\omega_{0}t) & \cos(\omega_{0}t) & 0\\
+        0 & 0 & 1
+    \end{array}\right)
+    \left(\begin{matrix}
+    -\Gamma_2 \cos(\omega_{0}t) -\omega_{0}\sin(\omega_{0}t) & -\Gamma_2 \sin(\omega_{0}t) +\omega_{0}\cos(\omega_{0}t)    &  0  \\
+    -\omega_{0} \cos(\omega_{0}t) + \Gamma_2 \sin(\omega_{0}t)   &  -\omega_{0} \sin(\omega_{0}t) - \Gamma_2 \cos(\omega_{0}t)  &  \Omega_d \cos{(\omega_{rf} t)} \\ \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) &  -\Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) &  -\Gamma_1 
+    \end{matrix}\right) &=\\
+    % last line
+    \left(\begin{matrix}
+    -\Gamma_2 & \omega_{0}    &  -\Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) \\
+    -\omega_{0} &  - \Gamma_2 &  \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) \\ \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) &  -\Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) &  -\Gamma_1 
+    \end{matrix}\right)
+\end{align}
+
+combining the terms together we get
+
+\begin{align}
+    \omega_{0}
+    \left(\begin{array}{ccc}
+       0 & 1 & 0\\
+       -1 & 0 & 0\\
+        0 & 0 & 0
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=\\
+   \left(\begin{matrix}
+    -\Gamma_2 & \omega_{0}    &  -\Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) \\
+    -\omega_{0} &  - \Gamma_2 &  \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) \\ \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) &  -\Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) &+ 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=\\
+   \left(\begin{matrix}
+    -\Gamma_2 & \omega_{0}    &  -\Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) \\
+    -\omega_{0} &  - \Gamma_2 &  \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) \\ \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) &  -\Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) &+
+    \left(\begin{array}{ccc}
+       0 & -\omega_{0} & 0\\
+       \omega_{0} & 0 & 0\\
+        0 & 0 & 0
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)\\&+ 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)
+\end{align}
+
+so finally
+
+\begin{align}
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=
+   \left(\begin{matrix}
+    -\Gamma_2 & 0    &  -\Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) \\
+    0 &  - \Gamma_2 &  \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) \\ \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{0}t) &  -\Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{0}t) &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+\end{align}
+
+Notice that in the case where we transfer to a different rotating frame of reference which rotates at some frequency $\omega_1$, then the Bloch equations would be a bit different after the transformation
+
+\begin{align}
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=
+   \left(\begin{matrix}
+    -\Gamma_2 & \omega_0-\omega_1    &  -\Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{1}t) \\
+    -\left( \omega_0-\omega_1\right) &  - \Gamma_2 &  \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{1}t) \\ \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{1}t) &  -\Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{1}t) &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+\end{align}
+
+Using trigonometric identities we can simplify the drive terms in the Bloch matrix
+
+\begin{align}
+    \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{1}t) &= \frac{\Omega_d}{2} \left(\sin(\left(\omega_{rf}+\omega_{1}\right)t)+\sin(\left(\omega_{rf}-\omega_{1}\right)t)\right)\\
+    \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{1}t) &= \frac{\Omega_d}{2} \left(\cos(\left(\omega_{rf}-\omega_{1}\right)t)+\cos(\left(\omega_{rf}+\omega_{1}\right)t)\right)\\
+\end{align}
+
+assuming that $\omega_{rf} - \omega_{1} \ll 1$, then we can use the RWA which states that fast oscillations average out to zero
+
+\begin{align}
+    \Omega_d \cos{(\omega_{rf} t)}\sin(\omega_{1}t) &= \frac{\Omega_d}{2} \sin(2\omega_{rf}t)=0\\
+    \Omega_d \cos{(\omega_{rf} t)}\cos(\omega_{1}t) &= \frac{\Omega_d}{2} \left(1+\cos(2\omega_{rf}t)\right)=\frac{\Omega_d}{2}\\
+\end{align}
+
+Then, the Bloch equations with the RWA are
+
+\begin{align}
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=
+   \left(\begin{matrix}
+    -\Gamma_2 & \omega_0-\omega_{rf}    &  0 \\
+    -\left( \omega_0-\omega_{rf}\right) &  - \Gamma_2 &  \frac{\Omega_d}{2} \\ 0 &  -\frac{\Omega_d}{2}  &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+\end{align}
+
+Next, we add to our model The effective magnetic field the Xe particles fill which produced by the alkali atoms, $b_{KS}\mathbf{S}=b_{KS}S_z\hat{z}$ and also
+some world rotation $\mathbf{\omega_r} = \omega_r\hat{z}$.
+
+The modified equations are
+
+\begin{align}
+    \frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)
+    &=
+   \left(\begin{matrix}
+    -\Gamma_2 & M_{12}    &  0 \\
+    M_{21} &  - \Gamma_2 &  \frac{\Omega_d}{2} \\ 0 &  -\frac{\Omega_d}{2}  &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)\\
+\end{align}
+
+where $M_{21}=-M_{12}$ and
+\begin{align}
+    M_{12} &= \omega_{0}+\gamma_{Xe}b_{KS}S_z+\omega_r-\omega_{rf}\\
+        &= \gamma_{Xe}B_0+\gamma_{Xe}b_{KS}S_z+\omega_r-\omega_{rf}\\
+\end{align}
+
+Next, let us find the steady state solution of the Bloch equations in the rotating frame with drive in $\hat{x}$ with the RWA
+
+\begin{align}
+    \left(\begin{array}{c}
+        \Gamma_2\tilde{K}_{x} - M_{12}\tilde{K}_{y}\\
+        M_{12}\tilde{K}_{x}+\Gamma_2\tilde{K}_{y}-\frac{\Omega_d}{2}\tilde{K}_{z}\\
+        \frac{\Omega_d}{2}\tilde{K}_{y}+\Gamma_1\tilde{K}_{z}
+    \end{array}\right)&=
+    \left(\begin{array}{c}
+        0\\
+        0\\
+        R_{se} 
+    \end{array}\right)
+\end{align}
+
+\begin{align}
+    \tilde{K}_{x} &= \frac{M_{12}}{\Gamma_2}\tilde{K}_{y}\\
+\end{align}
+
+\begin{align}
+    \left(\begin{array}{c}
+        \frac{M_{12}^2+\Gamma_2^2}{\Gamma_2}\tilde{K}_{y}-\frac{\Omega_d}{2}\tilde{K}_{z}\\
+        \frac{\Omega_d}{2}\tilde{K}_{y}+\Gamma_1\tilde{K}_{z}
+    \end{array}\right)&=
+    \left(\begin{array}{c}
+        0\\
+        R_{se} 
+    \end{array}\right)\\
+    \left(\begin{array}{cc}
+        \frac{M_{12}^2+\Gamma_2^2}{\Gamma_2} & -\frac{\Omega_d}{2}\\
+        \frac{\Omega_d}{2} & \Gamma_1
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{y}\\
+        \tilde{K}_{z} 
+    \end{array}\right)
+    &=
+    \left(\begin{array}{c}
+        0\\
+        R_{se} 
+    \end{array}\right)\\
+    \left(\begin{array}{cc}
+       \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2 & -\frac{\Omega_d}{2}\\
+        \frac{\Omega_d}{2} & \Gamma_1
+    \end{array}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{y}\\
+        \tilde{K}_{z} 
+    \end{array}\right)
+    &=
+    \left(\begin{array}{c}
+        0\\
+        R_{se} 
+    \end{array}\right)
+\end{align}
+
+
+\begin{align}
+   \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2 \tilde{K}_{y} &=  \frac{\Omega_d}{2}\tilde{K}_{z}\\
+    \tilde{K}_{y} &=  \frac{\frac{\Omega_d}{2}}{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2}\tilde{K}_{z}\\
+\end{align}
+
+\begin{align}
+    \frac{\Omega_d}{2}\tilde{K}_{y} + \Gamma_1 \tilde{K}_{z} &= R_{se}\\
+    \frac{\Omega_d}{2}\frac{\frac{\Omega_d}{2}}{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2}\tilde{K}_{z} + \Gamma_1 \tilde{K}_{z} &= R_{se}\\
+    \frac{\frac{\Omega_d^2}{4} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2\Gamma_1}{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2} \tilde{K}_{z} &= R_{se}\\
+    \frac{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)/\Gamma_1} \tilde{K}_{z} &= R_{se}\\
+     \tilde{K}_{z} &= \frac{R_{se}}{\Gamma_1} \frac{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
+\end{align}
+
+\begin{align}
+    \tilde{K}_{y} &=  \frac{\Omega_d}{2\Gamma_2}\frac{R_{se}}{\Gamma_1} \frac{1}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
+\end{align}
+
+\begin{align}
+    \tilde{K}_{x} &= \frac{M_{12}}{\Gamma_2}\frac{\Omega_d}{2\Gamma_2}\frac{R_{se}}{\Gamma_1} \frac{1}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
+\end{align}
+    
+Finally
+
+\begin{align}
+    \boxed{\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z} 
+    \end{array}\right)=
+    \frac{\frac{R_{se}}{\Gamma_1}}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
+    \left(\begin{array}{c}
+      \frac{M_{12}}{\Gamma_2}\frac{\Omega_d}{2\Gamma_2} \\
+       \frac{\Omega_d}{2\Gamma_2}\\
+         \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)
+    \end{array}\right)}
+\end{align}
+
+In the case where $M_{12}=0$ we get
+
+\begin{align}
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z} 
+    \end{array}\right)=
+    \frac{\frac{R_{se}}{\Gamma_1}}{1+\frac{\Omega_d^2}{4\Gamma_2\Gamma_1}}
+    \left(\begin{array}{c}
+      0 \\
+       \frac{\Omega_d}{2\Gamma_2}\\
+         1
+    \end{array}\right)
+\end{align}
+
+
+
+
+
+
 
 
 
