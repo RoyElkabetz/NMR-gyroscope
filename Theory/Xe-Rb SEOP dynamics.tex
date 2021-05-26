@@ -532,8 +532,7 @@ Then, the Bloch equations with the RWA are
         \tilde{K}_{x}\\
         \tilde{K}_{y}\\
         \tilde{K}_{z}
-    \end{array}\right)
-    &=
+    \end{array}\right)=
    \left(\begin{matrix}
     -\Gamma_2 & \omega_0-\omega_{rf}    &  0 \\
     -\left( \omega_0-\omega_{rf}\right) &  - \Gamma_2 &  \frac{\Omega_d}{2} \\ 0 &  -\frac{\Omega_d}{2}  &  -\Gamma_1 
@@ -547,7 +546,7 @@ Then, the Bloch equations with the RWA are
          0  \\
          0  \\
          R_{se} 
-    \end{matrix}\right)\\
+    \end{matrix}\right)
 \end{align}
 
 Next, we add to our model The effective magnetic field the Xe particles fill which produced by the alkali atoms, $b_{KS}\mathbf{S}=b_{KS}S_z\hat{z}$ and also
@@ -556,12 +555,11 @@ some world rotation $\mathbf{\omega_r} = \omega_r\hat{z}$.
 The modified equations are
 
 \begin{align}
-    \frac{d}{dt}\left(\begin{array}{c}
+    \boxed{\frac{d}{dt}\left(\begin{array}{c}
         \tilde{K}_{x}\\
         \tilde{K}_{y}\\
         \tilde{K}_{z}
-    \end{array}\right)
-    &=
+    \end{array}\right)=
    \left(\begin{matrix}
     -\Gamma_2 & M_{12}    &  0 \\
     M_{21} &  - \Gamma_2 &  \frac{\Omega_d}{2} \\ 0 &  -\frac{\Omega_d}{2}  &  -\Gamma_1 
@@ -575,7 +573,7 @@ The modified equations are
          0  \\
          0  \\
          R_{se} 
-    \end{matrix}\right)\\
+    \end{matrix}\right)}
 \end{align}
 
 where $M_{21}=-M_{12}$ and
@@ -662,7 +660,7 @@ Next, let us find the steady state solution of the Bloch equations in the rotati
     \tilde{K}_{x} &= \frac{M_{12}}{\Gamma_2}\frac{\Omega_d}{2\Gamma_2}\frac{R_{se}}{\Gamma_1} \frac{1}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
 \end{align}
     
-Finally
+Finally,
 
 \begin{align}
     \boxed{\left(\begin{array}{c}
@@ -694,13 +692,34 @@ In the case where $M_{12}=0$ we get
     \end{array}\right)
 \end{align}
 
+Recall that we measure the transverse spin polarization. Let us compute the optimal drive amplitude for maximal $\tilde{K}_y$ polarization
+
+\begin{align}
+    \frac{d\tilde{K}_{y}}{d \Omega_d} = \frac{R_{se}}{2\Gamma_2\Gamma_1}\frac{1}{1+\frac{\Omega_d^2}{4\Gamma_2\Gamma_1}} - \frac{R_{se}}{2\Gamma_2\Gamma_1}\frac{\Omega_d^2}{\Gamma_2\Gamma_1} \frac{1}{\left(1+\frac{\Omega_d^2}{4\Gamma_2\Gamma_1}\right)^2}=0
+\end{align}
+
+we get the next optimal drive amplitude $$\Omega_d^{\text{optimal}} = \sqrt{\frac{4\Gamma_2\Gamma_1}{3}}$$
+
+for the optimal drive, the $\hat{z}$ polarization would be
+$$\tilde{K}_{z} = \frac{3R_{se}}{4\Gamma_1}$$
+
+We can make the same calculation in the case where $M_{12}\neq 0$
+
+\begin{align}
+    \frac{d\tilde{K}_{y}}{d \Omega_d} = \frac{R_{se}}{2\Gamma_2\Gamma_1}\frac{1}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)} - \frac{R_{se}}{2\Gamma_2\Gamma_1}\frac{\Omega_d^2}{\Gamma_2\Gamma_1} \frac{1}{\left(\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\right)^2}=0
+\end{align}
+
+in that case the optimal drive amplitude is
+
+$$\Omega_d^{\text{optimal}} =\sqrt{\frac{4\Gamma_2\Gamma_1}{3}}\sqrt{1 + \left(M_{12}/\Gamma_2\right)^2}$$
+
+% Now, following Walker's notation in \cite{walker2016spin}, let us break the dynamics into two components, parallel and perpendicular to the magnetic field $B_0\hat{z}$ $$\mathbf{K}=K_z\hat{z}+\mathbf{K}_{\perp}$$
 
 
 
 
 
-
-
-
+\bibliographystyle{alpha}
+\bibliography{my_bib}
 
 \end{document}
