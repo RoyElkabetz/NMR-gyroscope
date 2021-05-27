@@ -712,20 +712,113 @@ in that case the optimal drive amplitude is
 
 $$\Omega_d^{\text{optimal}} =\sqrt{\frac{4\Gamma_2\Gamma_1}{3}}\sqrt{1 + \left(M_{12}/\Gamma_2\right)^2}$$
 
+Just for sports we can also solve the case of drive in $\hat{y}$, the Bloch equations in that case are
+
+\begin{align}
+    \boxed{\frac{d}{dt}\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right)=
+   \left(\begin{matrix}
+    -\Gamma_2 & M_{12}    &  -\frac{\Omega_d}{2} \\
+    M_{21} &  - \Gamma_2 &  0 \\ \frac{\Omega_d}{2} &   0 &  -\Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)}\label{eq:Bloch_equations_y_drive}
+\end{align}
+
+then the steady state solution would be
+
+\begin{align}
+    \left(\begin{array}{c}
+        \Gamma_2\tilde{K}_{x} - M_{12}\tilde{K}_{y} + \frac{\Omega_d}{2}\tilde{K}_{z}\\
+        M_{12}\tilde{K}_{x}+\Gamma_2\tilde{K}_{y}\\
+        -\frac{\Omega_d}{2}\tilde{K}_{x}+\Gamma_1\tilde{K}_{z}
+    \end{array}\right)&=
+    \left(\begin{array}{c}
+        0\\
+        0\\
+        R_{se} 
+    \end{array}\right)
+\end{align}
+
+
+$$\tilde{K}_y &= - \frac{M_{12}}{\Gamma_2}\tilde{K}_x$$
+
+\begin{align}
+     \left(\begin{array}{c}
+        \frac{\Gamma_2^2 + M_{12}^2}{\Gamma_2}\tilde{K}_{x} + \frac{\Omega_d}{2}\tilde{K}_{z}\\
+        -\frac{\Omega_d}{2}\tilde{K}_{x}+\Gamma_1\tilde{K}_{z}
+    \end{array}\right)&=
+    \left(\begin{array}{c}
+        0\\
+        R_{se} 
+    \end{array}\right)\\
+    \left(\begin{array}{c}
+        \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2\tilde{K}_{x} + \frac{\Omega_d}{2}\tilde{K}_{z}\\
+        -\frac{\Omega_d}{2}\tilde{K}_{x}+\Gamma_1\tilde{K}_{z}
+    \end{array}\right)&=
+    \left(\begin{array}{c}
+        0\\
+        R_{se} 
+    \end{array}\right)
+\end{align}
+
+$$\tilde{K}_{x} = -\frac{\Omega_d}{2}\frac{1}{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2}\tilde{K}_{z}$$
+
+$$\tilde{K}_{z} = \frac{R_{se}}{\Gamma_1} \frac{\left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)} $$
+
+so finally,
+
+\begin{align}
+    \boxed{\left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z} 
+    \end{array}\right)=
+    \frac{\frac{R_{se}}{\Gamma_1}}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
+    \left(\begin{array}{c}
+    -\frac{\Omega_d}{2\Gamma_2}\\
+      \frac{M_{12}}{\Gamma_2}\frac{\Omega_d}{2\Gamma_2} \\
+         \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)
+    \end{array}\right)}\label{eq:Bloch_solution_y_drive}
+\end{align}
+
+
+
 \section{NMR Gyroscope (NMRG)}
 Using the Xenon NMR model (the Bloch equations) we can implement a gyroscope which measures rotation along the primary axis of the system (in the case above: $\hat{z}$). 
 Following Walker's notation in \cite{walker2016spin}, we break the spin dynamics into two components, parallel and perpendicular to the primary axis $\hat{z}$  $$\mathbf{K}=K_z\hat{z}+\mathbf{K}_{\perp}$$
 
 describing $\mathbf{K}_{\perp}$ using a phasor notation
 $$K_{+} = K_x + iK_y = K_{\perp}e^{-i\phi}$$
-where $$K_{\perp}=\sqrt{K_x^2+K_y^2}\quad, \quad \phi=\tan^{-1}{\left(\frac{K_y}{K_x}\right)}$$
+where $$K_{\perp}=\sqrt{K_x^2+K_y^2}\quad, \quad \phi=\arctan{\left(\frac{K_y}{K_x}\right)}$$
 
 
-Now, if we solve for $\phi$ in the rotating frame of the drive, from eq.(\ref{eq:Bloch_solution}) we get
+Now, if we solve for $\phi$ in the rotating frame of the drive, from eq.(\ref{eq:Bloch_solution_y_drive}) we get
 
 \begin{align}
-    \phi = \tan^{-1}{\left(\frac{\tilde{K}_y}{\tilde{K}_x}\right)}=\tan^{-1}{\left(\frac{M_{12}}{\Gamma_2}\right)}
+    \phi = \arctan{\left(\frac{\tilde{K}_y}{\tilde{K}_x}\right)}=\arctan{\left(-\frac{M_{12}}{\Gamma_2}\right)}
 \end{align}
+
+for small phase, where $M_{12}\ll 1$ the phase can be approximated with it zero'th order Taylor expansion $$\phi= -\frac{M_{12}}{\Gamma_2}$$
+
+unfolding $M_{12}$ we get
+$$\phi= -\frac{\gamma_{Xe}B_0}{\Gamma_2}-\frac{\gamma_{Xe}b_{KS}S_z}{\Gamma_2}-\frac{\omega_r}{\Gamma_2}+\frac{\omega_{rf}}{\Gamma_2}$$
+
+\subsection{Dual species open-loop NMRG scheme}
+
+\subsection{Dual species closed-loop NMRG scheme}
+
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
