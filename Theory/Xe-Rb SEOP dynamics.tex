@@ -573,7 +573,7 @@ The modified equations are
          0  \\
          0  \\
          R_{se} 
-    \end{matrix}\right)}
+    \end{matrix}\right)}\label{eq:Bloch_equations}
 \end{align}
 
 where $M_{21}=-M_{12}$ and
@@ -583,6 +583,23 @@ where $M_{21}=-M_{12}$ and
 \end{align}
 
 Next, let us find the steady state solution of the Bloch equations in the rotating frame with drive in $\hat{x}$ with the RWA
+
+\begin{align}
+    \left(\begin{matrix}
+    \Gamma_2 & -M_{12}    &  0 \\
+    M_{12} &   \Gamma_2 &  -\frac{\Omega_d}{2} \\ 0 &  \frac{\Omega_d}{2}  &  \Gamma_1 
+    \end{matrix}\right)
+    \left(\begin{array}{c}
+        \tilde{K}_{x}\\
+        \tilde{K}_{y}\\
+        \tilde{K}_{z}
+    \end{array}\right) = 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)
+\end{align}
 
 \begin{align}
     \left(\begin{array}{c}
@@ -610,28 +627,10 @@ Next, let us find the steady state solution of the Bloch equations in the rotati
         0\\
         R_{se} 
     \end{array}\right)\\
-    \left(\begin{array}{cc}
-        \frac{M_{12}^2+\Gamma_2^2}{\Gamma_2} & -\frac{\Omega_d}{2}\\
-        \frac{\Omega_d}{2} & \Gamma_1
-    \end{array}\right)
     \left(\begin{array}{c}
-        \tilde{K}_{y}\\
-        \tilde{K}_{z} 
-    \end{array}\right)
-    &=
-    \left(\begin{array}{c}
-        0\\
-        R_{se} 
-    \end{array}\right)\\
-    \left(\begin{array}{cc}
-       \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2 & -\frac{\Omega_d}{2}\\
-        \frac{\Omega_d}{2} & \Gamma_1
-    \end{array}\right)
-    \left(\begin{array}{c}
-        \tilde{K}_{y}\\
-        \tilde{K}_{z} 
-    \end{array}\right)
-    &=
+        \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)\Gamma_2\tilde{K}_{y}-\frac{\Omega_d}{2}\tilde{K}_{z}\\
+        \frac{\Omega_d}{2}\tilde{K}_{y}+\Gamma_1\tilde{K}_{z}
+    \end{array}\right)&=
     \left(\begin{array}{c}
         0\\
         R_{se} 
@@ -660,7 +659,7 @@ Next, let us find the steady state solution of the Bloch equations in the rotati
     \tilde{K}_{x} &= \frac{M_{12}}{\Gamma_2}\frac{\Omega_d}{2\Gamma_2}\frac{R_{se}}{\Gamma_1} \frac{1}{\frac{\Omega_d^2}{4\Gamma_2\Gamma_1} + \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)}
 \end{align}
     
-Finally,
+Finally, the solution to the Bloch equation (eq.(\ref{eq:Bloch_equations})) is
 
 \begin{align}
     \boxed{\left(\begin{array}{c}
@@ -673,7 +672,7 @@ Finally,
       \frac{M_{12}}{\Gamma_2}\frac{\Omega_d}{2\Gamma_2} \\
        \frac{\Omega_d}{2\Gamma_2}\\
          \left(1 + \left(M_{12}/\Gamma_2\right)^2\right)
-    \end{array}\right)}
+    \end{array}\right)}\label{eq:Bloch_solution}
 \end{align}
 
 In the case where $M_{12}=0$ we get
@@ -713,11 +712,20 @@ in that case the optimal drive amplitude is
 
 $$\Omega_d^{\text{optimal}} =\sqrt{\frac{4\Gamma_2\Gamma_1}{3}}\sqrt{1 + \left(M_{12}/\Gamma_2\right)^2}$$
 
-% Now, following Walker's notation in \cite{walker2016spin}, let us break the dynamics into two components, parallel and perpendicular to the magnetic field $B_0\hat{z}$ $$\mathbf{K}=K_z\hat{z}+\mathbf{K}_{\perp}$$
+\section{NMR Gyroscope (NMRG)}
+Using the Xenon NMR model (the Bloch equations) we can implement a gyroscope which measures rotation along the primary axis of the system (in the case above: $\hat{z}$). 
+Following Walker's notation in \cite{walker2016spin}, we break the spin dynamics into two components, parallel and perpendicular to the primary axis $\hat{z}$  $$\mathbf{K}=K_z\hat{z}+\mathbf{K}_{\perp}$$
+
+describing $\mathbf{K}_{\perp}$ using a phasor notation
+$$K_{+} = K_x + iK_y = K_{\perp}e^{-i\phi}$$
+where $$K_{\perp}=\sqrt{K_x^2+K_y^2}\quad, \quad \phi=\tan^{-1}{\left(\frac{K_y}{K_x}\right)}$$
 
 
+Now, if we solve for $\phi$ in the rotating frame of the drive, from eq.(\ref{eq:Bloch_solution}) we get
 
-
+\begin{align}
+    \phi = \tan^{-1}{\left(\frac{\tilde{K}_y}{\tilde{K}_x}\right)}=\tan^{-1}{\left(\frac{M_{12}}{\Gamma_2}\right)}
+\end{align}
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
