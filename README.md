@@ -3,12 +3,11 @@
 ## TODO
 
 ### Repository structure
-#### 24/05/2021
-- [x] Add requirements.txt
-- [x] Add a utils.py file
+- [x] Add requirements.txt --- 24/05/2021
+- [x] Add a utils.py file --- 24/05/2021
 
 ### Theory
-- [x] Write solution to open loop dual species NMRG dynamics.
+- [x] Write solution to open loop dual species NMRG dynamics. --- 30/05/2021
 - [ ] Write solution to closed loop dual species NMRG dynamics.
 
 
