@@ -8,10 +8,11 @@
 - [x] Add a utils.py file
 
 ### Theory
-- [ ] Write solution to open loop dual species NMRG dynamics.
+- [x] Write solution to open loop dual species NMRG dynamics.
 - [ ] Write solution to closed loop dual species NMRG dynamics.
 
 
 ### Simulations
-- [ ] Write simulation to open loop dual species NMRG dynamics.
-- [ ] Write simulation to closed loop dual species NMRG dynamics.
+- [ ] Single specie without magnetic noise $B_{noise}=0, \omega_r>0$.
+- [ ] Dual species with magnetic noise $B_{noise}>0, \omega_r>0$.
+- [ ] Dual species with magnetic noise $B_{noise}>0, \omega_r>0 and smooth magetic drift. Explore for which drift size the simulation breaks (there is no noise cancellation).
