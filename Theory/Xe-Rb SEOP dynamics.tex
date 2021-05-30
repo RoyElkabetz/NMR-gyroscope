@@ -752,7 +752,7 @@ then the steady state solution would be
 \end{align}
 
 
-$$\tilde{K}_y &= - \frac{M_{12}}{\Gamma_2}\tilde{K}_x$$
+$$\tilde{K}_y = - \frac{M_{12}}{\Gamma_2}\tilde{K}_x$$
 
 \begin{align}
      \left(\begin{array}{c}
@@ -803,6 +803,13 @@ describing $\mathbf{K}_{\perp}$ using a phasor notation
 $$K_{+} = K_x + iK_y = K_{\perp}e^{-i\phi}$$
 where $$K_{\perp}=\sqrt{K_x^2+K_y^2}\quad, \quad \phi=\arctan{\left(\frac{K_y}{K_x}\right)}$$
 
+% Solving for the perpendicular polarization in the rotating frame we get
+
+% \begin{align}
+%     \frac{d\tilde{K}_{+}}{dt} &= \frac{d\tilde{K}_{x}}{dt}+i\frac{d\tilde{K}_{y}}{dt}\\
+%     &=-\Gamma_2 \tilde{K}_x + M_{12} \tilde{K}_y - \frac{\Omega_d}{2} \tilde{K}_z \\&- iM_{12} \tilde{K}_{x} - i\Gamma_2\tilde{K}_{y}\\
+% \end{align}
+
 
 Now, if we solve for $\phi$ in the rotating frame of the drive, from eq.(\ref{eq:Bloch_solution_y_drive}) we get
 
@@ -810,12 +817,37 @@ Now, if we solve for $\phi$ in the rotating frame of the drive, from eq.(\ref{eq
     \phi = \arctan{\left(\frac{\tilde{K}_y}{\tilde{K}_x}\right)}=\arctan{\left(-\frac{M_{12}}{\Gamma_2}\right)}
 \end{align}
 
-for small phase, where $M_{12}\ll 1$ the phase can be approximated with it zero'th order Taylor expansion $$\phi= -\frac{M_{12}}{\Gamma_2}$$
+for small phase, where $M_{12}\ll 1$ the phase can be approximated with it zeroth order Taylor expansion $$\phi= -\frac{M_{12}}{\Gamma_2}$$
 
 unfolding $M_{12}$ we get
 $$\phi= -\frac{\gamma_{Xe}B_0}{\Gamma_2}-\frac{\gamma_{Xe}b_{KS}S_z}{\Gamma_2}-\frac{\omega_r}{\Gamma_2}+\frac{\omega_{rf}}{\Gamma_2}$$
 
+In a real life NMR system we would also have some magnetic noise in the primary axis $\gamma_{Xe} B_{noise}$, so the phase would be
+$$\phi= -\frac{\gamma_{Xe}B_0}{\Gamma_2}-\frac{\gamma_{Xe}B_{noise}}{\Gamma_2}-\frac{\gamma_{Xe}b_{KS}S_z}{\Gamma_2}-\frac{\omega_r}{\Gamma_2}+\frac{\omega_{rf}}{\Gamma_2}$$
+
+all these parameters could in general be time dependent. Notice that in the phase equation we have two unknown parameters: fluctuations of the magnetic field $B_{noise}$ and the world rotation $\omega_r$. In order two extract the world rotation from the phase measurements we need to introduce another specie.  
+
+
 \subsection{Dual species open-loop NMRG scheme}
+Having system with two species, Xe129 and Xe131, we can compute the world rotation as follows
+
+\begin{align}
+    \phi_{129} &= -\frac{\gamma^{129}_{Xe}B_0}{\Gamma_2^{129}}-\frac{\gamma^{129}_{Xe}B_{noise}}{\Gamma_2^{129}}-\frac{\gamma^{129}_{Xe}b_{KS}S_z}{\Gamma_2^{129}}-\frac{\omega_r}{\Gamma_2^{129}}+\frac{\omega^{129}_{rf}}{\Gamma_2^{129}}\\
+    \phi_{131} &= -\frac{\gamma^{131}_{Xe}B_0}{\Gamma_2^{131}}-\frac{\gamma^{131}_{Xe}B_{noise}}{\Gamma_2^{131}}-\frac{\gamma^{131}_{Xe}b_{KS}S_z}{\Gamma_2^{131}}-\frac{\omega_r}{\Gamma_2^{131}}+\frac{\omega^{131}_{rf}}{\Gamma_2^{131}}
+\end{align}
+
+Then, subtracting the two equations we get
+
+\begin{align}
+    \frac{1}{\gamma^{129}_{Xe}}\left(\phi_{129}\Gamma_2^{129}-\omega^{129}_{rf}\right) - \frac{1}{\gamma^{131}_{Xe}}\left(\phi_{131}\Gamma_2^{131}-\omega^{131}_{rf}\right) &= \omega_r \left(\frac{1}{\gamma^{131}_{Xe}} - \frac{1}{\gamma^{129}_{Xe}}\right)
+\end{align}
+
+and finally the world rotation in an open-loop setting is given by 
+
+\begin{align}
+    \omega_r &= \left[\frac{ \gamma^{129}_{Xe} \gamma^{131}_{Xe} }{\gamma^{129}_{Xe} - \gamma^{131}_{Xe}}\right]\left[\frac{1}{\gamma^{129}_{Xe}}\left(\phi_{129}\Gamma_2^{129}-\omega^{129}_{rf}\right) - \frac{1}{\gamma^{131}_{Xe}}\left(\phi_{131}\Gamma_2^{131}-\omega^{131}_{rf}\right)\right]
+\end{align}
+
 
 \subsection{Dual species closed-loop NMRG scheme}
 
