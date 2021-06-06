@@ -53,7 +53,7 @@ class Xenon:
             M[1, 2] = environment.Ad_x / 2.
             M[2, 0] = environment.Ad_y / 2.
             M[2, 1] = -environment.Ad_x / 2.
-            M12 = M12  - environment.wd_x - environment.wd_y
+            M12 = M12 - environment.wd_x - environment.wd_y
 
         M[0, 1] = M12
         M[1, 0] = -M12
