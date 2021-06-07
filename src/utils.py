@@ -16,6 +16,11 @@ def sigmoid(x, w, tau):
     return 1 / (1 + np.exp(-w * (x - tau)))
 
 
+def ReLU(x, x0, m):
+    """Returns the ReLU function around x0 with slope m"""
+    return m * (x - x0) * (x - x0 > 0)
+
+
 def smooth(y, box_pts=10):
     """Smoothing a signal"""
     box = np.ones(box_pts) / box_pts
