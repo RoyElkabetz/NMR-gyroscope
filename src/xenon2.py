@@ -1,0 +1,119 @@
+# PYTHON PACKAGES
+from scipy.integrate import odeint
+from scipy.linalg import inv
+import matplotlib.pyplot as plt
+import numpy as np
+
+# MY PACKAGES
+import physical_constant_units as phy
+import utils
+
+
+class Xenon:
+    def __init__(self, gamma, t1, t2, K0=np.array([0.05, 0.03, 0.95]), ts=500, dt=1, name='129'):
+
+        self.name = name
+        # Physical parameters
+        self.gamma = gamma      # The xenon gyromagnetic ration   [rad  s^-1 T^-1]
+
+        # Decays
+        self.t1 = t1            # T1 of xenon                     [s]
+        self.t2 = t2            # T2 of xenon                     [s]
+        self.gamma1 = 1. / t1   #                                 [s^-1]
+        self.gamma2 = 1. / t2   #                                 [s^-1]
+
+        # solver parameters
+        self.ts = ts                                                # solver time frame [s]
+        self.dt = dt                                                # solver time steps [s]
+        self.t_steps = int(ts // dt)                                # solver number of steps
+        self.time_vec = np.linspace(0, self.ts, self.t_steps)       # time vector [s]
+
+        # Spin polarization
+        self.Kt = np.zeros((self.t_steps, 3))
+        self.Kt[0, :] = K0
+        self.Ks = np.zeros((self.t_steps, 3))
+        self.Rse = np.array([0, 0, 0])
+        self.Kt_perp = None
+        self.Ks_perp = None
+        self.phase_perp = None
+
+        # Bloch matrix
+        self.M = np.zeros((3, 3))
+
+        # boolean params
+        self.drive = True
+
+    def set_spin_exchange_amp(self, rse):
+        """Set spin exchange pumping"""
+        self.Rse = rse
+
+    def set_bloch_matrix(self, environment):
+        """Constructing the Bloch matrix of the dynamics"""
+        i = environment.i
+        M = np.array(
+            [
+              [-self.gamma2 , 0              , 0             ],
+              [0            , -self.gamma2   , 0             ],
+              [0            , 0              , -self.gamma1  ]
+              ]
+        )
+        M12 = self.gamma * (environment.B0[i] + environment.Bnoise[i]) + environment.wr[i]
+        if self.drive:
+            M[0, 2] = -environment.Ad_y[i] / 2.
+            M[1, 2] = environment.Ad_x[i] / 2.
+            M[2, 0] = environment.Ad_y[i] / 2.
+            M[2, 1] = -environment.Ad_x[i] / 2.
+            M12 = M12 - environment.wd_x[i] - environment.wd_y[i]
+
+        M[0, 1] = M12
+        M[1, 0] = -M12
+        self.M = M
+
+    def solve_steady_state(self, i):
+        self.Ks[i] = -inv(self.M) @ self.Rse
+
+    def bloch_equations(self, K, t):
+        """Bloch dynamics model"""
+        dK_dt = np.matmul(self.M, K) + self.Rse
+        return dK_dt
+
+    def update_solver_time_frame(self, ts, dt):
+        """Updating the solver parameters"""
+        # solver parameters
+        self.ts = ts                                            # solver time frame [s]
+        self.dt = dt                                            # solver time steps [s]
+        self.t_steps = int(ts // dt)                            # solver number of steps
+        self.time_vec = np.linspace(0, self.ts, self.t_steps)   # time vector [s]
+
+    def solve_dynamics(self, environment):
+        """Solving the Bloch equations"""
+        ts_frame = np.linspace(0, self.dt, 2)  # single time frame for solver
+        for i in range(1, self.t_steps):
+            environment.set_step(i - 1)
+            self.set_bloch_matrix(environment=environment)
+            self.solve_steady_state(i - 1)
+            Kt_temp = self.Kt[i - 1, :]
+            Kt_temp = odeint(self.bloch_equations, Kt_temp, ts_frame)
+            self.Kt[i, :] = Kt_temp[-1, :]
+        environment.set_step(self.t_steps - 1)
+        self.solve_steady_state(self.t_steps - 1)
+
+    def compute_perpendicular_values(self):
+        """Compute perpendicular polarization magnitude and phase with respect to the drive"""
+        self.Kt_perp = np.sqrt(self.Kt[:, 0] ** 2 + self.Kt[:, 1] ** 2)
+        self.Ks_perp = np.sqrt(self.Ks[:, 0] ** 2 + self.Ks[:, 1] ** 2)
+        self.phase_perp = np.arctan(self.Kt[:, 1] / self.Kt[:, 0])
+
+    def display_params(self):
+        print('===================================================================')
+        print(f'| Xenon {self.name}:')
+        print(f'| ----------')
+        print(f'| gyromagnetic ratio:     {self.gamma}')
+        print(f'| T1:                     {self.t1}')
+        print(f'| T2:                     {self.t2}')
+        print(f'| K0:                     {self.Kt[0, :]}')
+        print(f'| Kt:                     {self.Kt[-1, :]}')
+        print(f'| K steady:               {self.Ks[-1, :]}')
+        print('===================================================================')
+
+

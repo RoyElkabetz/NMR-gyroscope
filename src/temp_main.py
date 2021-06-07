@@ -6,14 +6,14 @@ import numpy as np
 
 # MY PACKAGES
 import physical_constant_units as phy
-import environment as env
-import xenon as xe
+import environment2 as env
+import xenon2 as xe
 import utils
 
 # solver parameters
 t_final = 500
 dt = 1
-steps = int(t_final // dt )
+steps = int(t_final // dt)
 ts1 = np.linspace(0, dt, 2)
 ts = np.linspace(0, t_final, steps)
 
@@ -25,25 +25,23 @@ g129 = phy.G129                        # gyromagnetic ratio [rad  s^-1  T^-1]
 t1 = 30                                # s
 t2 = 8                                 # s
 Rse = np.array([0, 0, 0.1]) * t1       # |K| / s
-Kt = np.zeros((steps, 3))
-Ks = np.zeros((steps, 3))
 
-# Environmemnt parameters
-B0 = 1 * phy.G2T * np.ones_like(ts)                            # Tesla
-Bnoise = 0 * phy.G2T * utils.smooth(np.random.randn(len(ts)))  # Tesla
-Ad = 2 * np.sqrt((1 / t1) * (1 / t2)) * np.ones_like(ts)       # rad / s
-wd = g129 * 1 * phy.G2T * np.ones_like(ts)                     # rad / s
-
+# Environment parameters
+B0 = 1 * phy.G2T * np.ones_like(ts)                             # Tesla
+Bnoise = 0 * phy.G2T * utils.smooth(np.random.randn(len(ts)))   # Tesla
+Ad_y = 2 * np.sqrt((1 / t1) * (1 / t2)) * np.ones_like(ts)      # rad / s
+wd_y = g129 * 1 * phy.G2T * np.ones_like(ts)                    # rad / s
+Ad_x = np.zeros_like(ts)                                        # rad / s
+wd_x = np.zeros_like(ts)                                        # rad / s
 
 # initialize Xenon
-Xe129 = xe.Xenon(gamma=g129, t1=t1, t2=t2, name='129')
-Xe129.K0 = np.array([0.0259, 0.02, 0.3])
+Xe129 = xe.Xenon(gamma=g129, t1=t1, t2=t2, K0=np.array([0.0259, 0.02, 0.3]), ts=t_final, dt=dt, name='129')
 Xe129.set_spin_exchange_amp(Rse)
 Xe129.display_params()
 
 # initialize Environment
 env129 = env.Environment()
-env129.set_state(wr=wr[0], B0=B0[0], Bnoise=Bnoise[0], Ad_y=Ad[0], wd_y=wd[0])
+env129.set_state(wr=wr, B0=B0, Bnoise=Bnoise, Ad_y=Ad_y, wd_y=wd_y, Ad_x=Ad_x, wd_x=wd_x)
 env129.display_params()
 
 # plot world rotation
@@ -62,13 +60,7 @@ plt.show()
 
 
 # run solver and save dynamics
-for i, t in enumerate(ts):
-    env129.set_state(wr=wr[i], B0=B0[i], Bnoise=Bnoise[i], Ad_y=Ad[i], wd_y=wd[i])
-    Xe129.set_bloch_matrix(env129)
-    Xe129.solve_steady_state()
-    Ks[i, :] = Xe129.Ksteady
-    Kt1 = Xe129.solve_dynamics(ts1)
-    Kt[i, :] = Kt1[-1, :]
-    Xe129.K0 = Kt1[-1, :]
+Xe129.solve_dynamics(env129)
 
-utils.plot_results(ts, Kt, Ks, Xe129, env129, wr)
+
+utils.plot_results1(Xe129, env129)
