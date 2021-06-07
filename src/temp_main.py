@@ -6,8 +6,8 @@ import numpy as np
 
 # MY PACKAGES
 import physical_constant_units as phy
-import environment2 as env
-import xenon2 as xe
+import environment as env
+import xenon as xe
 import utils
 
 # solver parameters
