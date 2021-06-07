@@ -21,6 +21,11 @@ def ReLU(x, x0, m):
     return m * (x - x0) * (x - x0 > 0)
 
 
+def flat_sine(x, x0, f):
+    """Returns a flat start to a sine wave with frequency f"""
+    return np.sin(2 * np.pi * f * x) * (2 * np.pi * f * x >= 2 * np.pi)
+
+
 def smooth(y, box_pts=10):
     """Smoothing a signal"""
     box = np.ones(box_pts) / box_pts
