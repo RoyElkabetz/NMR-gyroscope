@@ -27,6 +27,7 @@ class Xenon:
         self.dt = dt                                                # solver time steps [s]
         self.t_steps = int(ts // dt)                                # solver number of steps
         self.time_vec = np.linspace(0, self.ts, self.t_steps)       # time vector [s]
+        self.solver_done = False                                    # boolean for state of solver
 
         # Spin polarization
         self.Kt = np.zeros((self.t_steps, 3))
@@ -97,6 +98,7 @@ class Xenon:
             self.Kt[i, :] = Kt_temp[-1, :]
         environment.set_step(self.t_steps - 1)
         self.solve_steady_state(self.t_steps - 1)
+        self.solver_done = True
 
     def compute_perpendicular_values(self):
         """Compute perpendicular polarization magnitude and phase with respect to the drive"""
@@ -115,5 +117,66 @@ class Xenon:
         print(f'| Kt:                     {self.Kt[-1, :]}')
         print(f'| K steady:               {self.Ks[-1, :]}')
         print('===================================================================')
+
+    def plot_results(self, environment, ti=0):
+        assert self.solver_done
+        self.compute_perpendicular_values()
+        ts = self.time_vec
+        # Plot the spin solution
+        plt.rcParams.update({'font.size': 12})  # increase the font size
+        plt.rcParams['axes.facecolor'] = 'white'
+        plt.rcParams["figure.facecolor"] = 'lightyellow'
+        plt.rcParams["figure.facecolor"] = 'lightyellow'
+        plt.rcParams["lines.linewidth"] = 2.5
+
+        fig = plt.figure(figsize=(20, 14))
+        ax1 = plt.subplot(3, 2, (1, 2))
+        ax1.set_title('Kx, Ky, Kz polarizations')
+        ax1.set_xlabel("time [s]")
+        ax1.set_ylabel("$K$")
+        ax1.plot(ts, self.Kt[:, 0], label='$K_x$', color='tab:blue')
+        ax1.plot(ts, self.Kt[:, 1], label='$K_y$', color='tab:orange')
+        ax1.plot(ts, self.Kt[:, 2], label='$K_z$', color='tab:green')
+        ax1.plot(ts, self.Ks[:, 0], '--', label='$K_x$ - steady state solution', color='tab:blue')
+        ax1.plot(ts, self.Ks[:, 1], '--', label='$K_y$ - steady state solution', color='tab:orange')
+        ax1.plot(ts, self.Ks[:, 2], '--', label='$K_z$ - steady state solution', color='tab:green')
+        ax1.legend()
+        ax1.grid(True)
+
+        ax2 = plt.subplot(3, 2, 3)
+        ax2.plot(ts, self.Kt_perp, label='$|K_{\perp}|$', color='tab:blue')
+        ax2.plot(ts, self.Ks_perp, '--', label='$|K_{\perp}|$ steady state solution', color='tab:blue')
+        ax2.set_xlabel("time [s]")
+        ax2.set_ylabel("$K$")
+        ax2.grid(True)
+        ax2.legend()
+        ax2.set_title('Perpendicular polarization')
+
+        ax3 = plt.subplot(3, 2, 4)
+        ax3.plot(ts, self.phase_perp * phy.R2D, label='$\phi = arctan(K_y/K_x)$')
+        ax3.set_xlabel("time [s]")
+        ax3.set_ylabel("$\phi$ [degree]")
+        ax3.grid(True)
+        ax3.legend()
+        ax3.set_title('Phase difference with respect to drive')
+
+        world_rotation = -self.phase_perp * self.gamma2 + self.gamma * environment.B0 - environment.wd_y
+        ax4 = plt.subplot(3, 2, (5, 6))
+        ax4.plot(ts[ts > ti], world_rotation[ts > ti], label='$\Omega_r$ - calculated', color='tab:green')
+        ax4.plot(ts[ts > ti], environment.wr[ts > ti], '--', label='$\Omega_r$ - true', color='tab:green')
+        ax4.set_xlabel("time [s]")
+        ax4.set_ylabel("$\omega$ [rad/s]")
+        ax4.grid(True)
+        ax4.legend(loc='upper right')
+        ax4.set_title('World rotation')
+        ax5 = ax4.twinx()
+        ax5.plot(ts[ts > ti], world_rotation[ts > ti] - environment.wr[ts > ti],
+                 label='$\Omega_r^{calc} - \Omega_r^{true}$', color='red')
+        ax5.legend(loc='lower right')
+        ax5.set_ylabel('error', color='red')
+        ax5.tick_params(axis='y', labelcolor='red')
+
+        plt.tight_layout
+        plt.show()
 
 

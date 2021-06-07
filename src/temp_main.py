@@ -18,7 +18,8 @@ ts1 = np.linspace(0, dt, 2)
 ts = np.linspace(0, t_final, steps)
 
 # world rotation parameters
-wr = 0.01 * utils.sigmoid(ts, 1, 100)                          # rad / s
+#wr = 0.01 * utils.sigmoid(ts, 1, 100)                          # rad / s
+wr = 10 * utils.gaussian(ts, 200, 50)                          # rad / s
 
 # Xenon parameters
 g129 = phy.G129                        # gyromagnetic ratio [rad  s^-1  T^-1]
@@ -28,7 +29,7 @@ Rse = np.array([0, 0, 0.1]) * t1       # |K| / s
 
 # Environment parameters
 B0 = 1 * phy.G2T * np.ones_like(ts)                             # Tesla
-Bnoise = 0 * phy.G2T * utils.smooth(np.random.randn(len(ts)))   # Tesla
+Bnoise = 1e-6 * phy.G2T * utils.smooth(np.random.randn(len(ts)))   # Tesla
 Ad_y = 2 * np.sqrt((1 / t1) * (1 / t2)) * np.ones_like(ts)      # rad / s
 wd_y = g129 * 1 * phy.G2T * np.ones_like(ts)                    # rad / s
 Ad_x = np.zeros_like(ts)                                        # rad / s
@@ -61,6 +62,4 @@ plt.show()
 
 # run solver and save dynamics
 Xe129.solve_dynamics(env129)
-
-
-utils.plot_results1(Xe129, env129)
+Xe129.plot_results(env129)

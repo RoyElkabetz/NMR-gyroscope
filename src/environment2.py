@@ -6,6 +6,7 @@ import numpy as np
 import physical_constant_units as phy
 import utils
 
+
 class Environment:
     def __init__(self, name='Xenon129 Environment'):
         self.name = name
