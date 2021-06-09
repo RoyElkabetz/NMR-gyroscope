@@ -39,7 +39,7 @@ class Xenon:
         self.phase_perp = None
 
         # Bloch matrix
-        self.M = np.zeros((3, 3))
+        self.M = None
 
         # boolean params
         self.drive = True
@@ -71,7 +71,12 @@ class Xenon:
         self.M = M
 
     def solve_steady_state(self, i):
-        self.Ks[i] = -inv(self.M) @ self.Rse
+        self.Ks[i, :] = -inv(self.M) @ self.Rse
+
+    def init_with_steady_state(self):
+        assert self.M is not None
+        self.solve_steady_state(0)
+        self.Kt[0, :] = self.Ks[0, :]
 
     def bloch_equations(self, K, t):
         """Bloch dynamics model"""
