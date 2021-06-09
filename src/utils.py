@@ -32,4 +32,8 @@ def smooth(y, box_pts=10):
     y_smooth = np.convolve(y, box, mode='same')
     return y_smooth
 
+def l2(x):
+    """Compute the l2 norm of x: ||x||_2"""
+    return np.sqrt(np.sum(np.power(x, 2)))
+
 
