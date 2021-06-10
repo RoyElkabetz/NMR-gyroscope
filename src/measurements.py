@@ -140,21 +140,21 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
         world_rotation = -my_Xe.phase_perp * my_Xe.gamma2 + my_Xe.gamma * my_env.B0 - my_env.wd_y
         wr_measurements[i] = world_rotation[-1]
 
-        if plot_results:
-            # plot dynamic range results
-            fig = plt.figure(figsize=(12, 8))
-            ax = plt.subplot()
-            ax.set_title('World rotation dynamic range simulation')
-            ax.loglog(wr_amp, wr_measurements, 'o', label='$\Omega_r$')
-            ax.loglog(wr_amp, wr_amp, label='linear')
-            ax.set_ylabel('$\Omega_r^{calc}$ [rad / s]')
-            ax.set_xlabel('$\Omega_r^{True}$ [rad / s]')
-            ax.vlines(1 / np.sqrt(t1 * t2), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
-                      color='red', label=r'$\frac{1}{\sqrt{T_1 * T_2}}$')
-            ax.grid(True)
-            ax.legend()
-            plt.tight_layout
-            plt.show()
+    if plot_results:
+        # plot dynamic range results
+        fig = plt.figure(figsize=(12, 8))
+        ax = plt.subplot()
+        ax.set_title('World rotation dynamic range simulation')
+        ax.loglog(wr_amp, wr_measurements, 'o', label='$\Omega_r$')
+        ax.loglog(wr_amp, wr_amp, label='linear')
+        ax.set_ylabel('$\Omega_r^{calc}$ [rad / s]')
+        ax.set_xlabel('$\Omega_r^{True}$ [rad / s]')
+        ax.vlines(1 / np.sqrt(t1 * t2), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
+                  color='red', label=r'$\frac{1}{\sqrt{T_1 * T_2}}$')
+        ax.grid(True)
+        ax.legend()
+        plt.tight_layout
+        plt.show()
 
-        if get_values:
-            return wr_amp, wr_measurements
+    if get_values:
+        return wr_amp, wr_measurements
