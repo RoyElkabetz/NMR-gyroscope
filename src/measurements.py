@@ -98,7 +98,7 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
 
 def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_amp, Bnoise_amp=0, plot_results=True, get_values=False):
     # world rotation parameters
-    wr_measurements = np.zeros_like(wr_amplitude)
+    wr_measurements = np.zeros_like(wr_amp)
 
     # solver parameters
     t_final = 1000
@@ -145,8 +145,8 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
             fig = plt.figure(figsize=(12, 8))
             ax = plt.subplot()
             ax.set_title('World rotation dynamic range simulation')
-            ax.loglog(wr_amplitude, wr_measurements, 'o', label='$\Omega_r$')
-            ax.loglog(wr_amplitude, wr_amplitude, label='linear')
+            ax.loglog(wr_amp, wr_measurements, 'o', label='$\Omega_r$')
+            ax.loglog(wr_amp, wr_amp, label='linear')
             ax.set_ylabel('$\Omega_r^{calc}$ [rad / s]')
             ax.set_xlabel('$\Omega_r^{True}$ [rad / s]')
             ax.vlines(1 / np.sqrt(t1 * t2), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
