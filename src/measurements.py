@@ -137,7 +137,7 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
         my_Xe.compute_perpendicular_values()
 
         # computing the world rotation from xenon measurements
-        world_rotation = -Xe129.phase_perp * Xe129.gamma2 + Xe129.gamma * env129.B0 - env129.wd_y
+        world_rotation = -my_Xe.phase_perp * my_Xe.gamma2 + my_Xe.gamma * my_env.B0 - my_env.wd_y
         wr_measurements[i] = world_rotation[-1]
 
         if plot_results:
