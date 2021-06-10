@@ -15,4 +15,5 @@
 - [x] Single specie without magnetic noise $B_{noise}=0, \omega_r>0$. --- 2/06/2021
 - [x] Single specie dynamic-range simulation with and without magnetic noise $B_{noise}\leq 0, \omega_r>0$ . --- 2/06/2021
 - [x] Dual species with magnetic noise $B_{noise}>0, \omega_r>0$. --- 6/06/2021
+- [ ] compute PSD of $B_{noise}>0, \omega_r>0$ and find the connection to T_2.
 - [ ] Dual species with magnetic noise $B_{noise}>0, \omega_r>0 and smooth magetic drift. Explore for which drift size the simulation breaks (there is no noise cancellation).
