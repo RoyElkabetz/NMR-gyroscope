@@ -83,3 +83,8 @@ def psd_compare(signals_list, sampling_frequency_hz, noise_amplitude=None, names
     ax.grid(True)
     plt.show()
 
+
+def get_white_noise(noise_amplitude, sampling_frequency, time_vector):
+    """Get Gaussian White Noise vector in the same length as time_vector"""
+    noise_power = np.power(noise_amplitude, 2) * sampling_frequency / 2  # noise power [power / Hz]
+    return np.random.normal(scale=np.sqrt(noise_power), size=time_vector.shape)
