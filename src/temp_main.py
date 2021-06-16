@@ -11,14 +11,14 @@ import xenon as xe
 import utils
 
 
-x = np.linspace(0, 100, 1000)
-x0 = 30
-m = 0.1
-y = utils.ReLU(x, x0, m)
-
-plt.figure()
-plt.plot(x, y)
-plt.show()
+# x = np.linspace(0, 100, 1000)
+# x0 = 30
+# m = 0.1
+# y = utils.ReLU(x, x0, m)
+#
+# plt.figure()
+# plt.plot(x, y)
+# plt.show()
 
 
 # # solver parameters
@@ -74,3 +74,58 @@ plt.show()
 # # run solver and save dynamics
 # Xe129.solve_dynamics(env129)
 # Xe129.plot_results(env129)
+
+
+# Signal parameters
+frequency = 2                           # sine wave frequency [Hz]
+sampling_frequency = 20 * frequency     # sampling frequency [Hz]
+t_f = 30                                # final time of time vector [s]
+dt = 1 / sampling_frequency             # time step for simulation [s]
+N = np.int(t_f // dt)                   # sampling points in time vector
+t = np.linspace(0, t_f, N)              # time vector  [s]
+signal_amplitude = 10                   # signal amplitude [amplitude]
+
+# Noise parameters
+cutoff = 5                             # noise cutoff frequency [Hz]
+order = 10                             # order of the low pass filter
+noise_amplitude = 0.067                # noise amplitude [amplitude / sqrt(Hz)]
+noise_power = np.power(noise_amplitude, 2) * sampling_frequency / 2 # noise power [power / Hz]
+
+# The noise
+noise = np.random.normal(scale=np.sqrt(noise_power), size=t.shape)
+filtered_noise = utils.butter_low_pass_filter(noise,
+                                              order,
+                                              cutoff,
+                                              sampling_frequency,
+                                              plot_filter=True) # filtered noise
+
+
+# The signals
+signal = signal_amplitude * np.sin(2 * np.pi * frequency * t)
+noisy_signal = signal + noise
+filtered_noisy_signal = signal + filtered_noise
+smoothed_signal = utils.smooth(noisy_signal, 10)  # smoothing the signal with mooving average
+
+
+# plot all the signals
+fig = plt.figure(figsize=(20, 4))
+ax = plt.subplot(111)
+ax.plot(t, signal, label='signal')
+ax.plot(t, noisy_signal, label='noisy signal')
+ax.plot(t, filtered_noisy_signal, label='filtered noisy signal')
+ax.plot(t, smoothed_signal, label='smoothed signal')
+ax.set_xlabel('Time [s]')
+ax.set_ylabel('Amplitude [a.u.]') # arbitrary units (units of amplitude)
+ax.legend()
+ax.grid(True)
+plt.show()
+
+
+signals_list = [noise, signal, noisy_signal, filtered_noisy_signal, smoothed_signal]
+names = ['noise', 'signal', 'noisy signal', 'filtered noisy signal', 'smoothed signal']
+
+# plot PSD of all signals
+utils.psd_compare(signals_list, sampling_frequency, noise_amplitude=noise_amplitude, names=names)
+
+
+
