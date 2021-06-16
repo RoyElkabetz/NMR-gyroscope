@@ -1,5 +1,10 @@
 # SEOP-and-NMR
 
+
+This repository contains materials Spin Exchange Optical Pumping (SEOP) and Nuclear Magnetic Resonance (NMR) theory and simulations. 
+
+
+
 ## TODO
 
 ### Repository structure
@@ -17,3 +22,12 @@
 - [x] Dual species with magnetic noise $B_{noise}>0, \omega_r>0$. --- 6/06/2021
 - [ ] compute PSD of $B_{noise}>0, \omega_r>0$ and find the connection to T_2.
 - [ ] Dual species with magnetic noise $B_{noise}>0, \omega_r>0 and smooth magetic drift. Explore for which drift size the simulation breaks (there is no noise cancellation).
+
+
+
+
+## List of Notebooks
+
+| #   | Subject                                         | Colab             | Nbviwer               |
+|:----:|------------------------------------------------|:-----------------:|:---------------------:|
+| 0    | Gaussian White Noise                           | [![colab]()](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)|
