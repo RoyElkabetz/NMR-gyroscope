@@ -1,7 +1,7 @@
 # SEOP-and-NMR
 
 
-This repository contains materials Spin Exchange Optical Pumping (SEOP) and Nuclear Magnetic Resonance (NMR) theory and simulations. 
+This repository contains theory an simulations of Spin Exchange Optical Pumping (SEOP) and Nuclear Magnetic Resonance (NMR) physics. 
 
 
 
@@ -30,4 +30,7 @@ This repository contains materials Spin Exchange Optical Pumping (SEOP) and Nucl
 
 | #   | Subject                                         | Colab             | Nbviwer               |
 |:----:|------------------------------------------------|:-----------------:|:---------------------:|
-| 0    | Gaussian White Noise                           | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)|
+| 0    | Gaussian White Noise simulation                | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)|
+| 1   | Single species NMR simulation                   | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/single_specie_experiment.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/single_specie_experiment.ipynb)|
+| 2   | Dual species NMR simulation                   | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/dual_specie_experiment.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/dual_specie_experiment.ipynb)|
+
