@@ -72,7 +72,7 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         phase_diff[i] = np.arccos(np.dot(wr[ts > t_final - period], world_rotation[ts > t_final - period]) / utils.l2(wr[ts > t_final - period]) / utils.l2(world_rotation[ts > t_final - period])) / np.pi * 180
         
         if plot_steps:
-            print('\nfreq: {}, steps: {}'.format(freq, steps))
+            print('\nfreq: {}, steps: {}, fs: {}'.format(freq, steps, sampling_frequency))
             my_Xe.plot_results(my_env)
         
         
