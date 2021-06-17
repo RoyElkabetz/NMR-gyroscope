@@ -96,16 +96,19 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         return freq_list, phase_diff, amplitude_ratio
 
 
-def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_amp, Bnoise_amp=0, plot_results=True, get_values=False):
+def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_amp, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, plot_results=True, get_values=False, dt=1, t_final=1000):
     # world rotation parameters
     wr_measurements = np.zeros_like(wr_amp)
 
     # solver parameters
-    t_final = 1000
-    dt = 1
     steps = int(t_final // dt)
+    sampling_frequency = 1. / dt
     ts = np.linspace(0, t_final, steps)
-
+    Bnoise = np.zeros_like(ts)
+    if Bnoise_amp != 0:
+        noise = utils.get_white_noise(Bnoise_amp, sampling_frequency, ts)
+        Bnoise = utils.butter_low_pass_filter(noise, filter_order, noise_cutoff_hz, sampling_frequency)
+        
     # solver
     for i, amp in enumerate(tqdm(wr_amp)):
         # world rotation
@@ -115,10 +118,9 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
         Rse = np.array([0, 0, 0.1]) * t1  # |K| / s
 
         # Environment parameters
-        B0 = 1 * phy.G2T * np.ones_like(ts)  # Tesla
-        Bnoise = Bnoise_amp * phy.G2T * utils.smooth(np.random.randn(len(ts)))  # Tesla
+        B0 = B0_amp * phy.G2T * np.ones_like(ts)  # Tesla
         Ad_y = 2 * np.sqrt((1 / t1) * (1 / t2)) * np.ones_like(ts)  # rad / s
-        wd_y = gyromagnetic * 1 * phy.G2T * np.ones_like(ts)  # rad / s
+        wd_y = gyromagnetic * B0_amp * phy.G2T * np.ones_like(ts)  # rad / s
         Ad_x = np.zeros_like(ts)  # rad / s
         wd_x = np.zeros_like(ts)  # rad / s
 
