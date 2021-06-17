@@ -68,8 +68,8 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
 
         # computing the world rotation from xenon measurements
         world_rotation = -my_Xe.phase_perp * my_Xe.gamma2 + my_Xe.gamma * my_env.B0 - my_env.wd_y
-        amplitude_ratio[i] = np.max(world_rotation[ts > 8 * t2]) / np.max(wr[ts > 8 * t2])
-        phase_diff[i] = np.arccos(np.dot(wr[ts > 8 * t2], world_rotation[ts > 8 * t2]) / utils.l2(wr[ts > 8 * t2]) / utils.l2(world_rotation[ts > 8 * t2])) / np.pi * 180
+        amplitude_ratio[i] = np.max(np.abs(world_rotation[ts > t_final - period])) / np.max(np.abs(wr[ts > t_final - period]))
+        phase_diff[i] = np.arccos(np.dot(wr[ts > t_final - period], world_rotation[ts > t_final - period]) / utils.l2(wr[ts > t_final - period]) / utils.l2(world_rotation[ts > t_final - period])) / np.pi * 180
         
         if plot_steps:
             print('\nfreq: {}, steps: {}'.format(freq, steps))
