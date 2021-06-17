@@ -13,7 +13,7 @@ import xenon as xe
 import utils
 
 
-def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False):
+def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False, plot_steps=False):
 
     if freq_list is None:
         estimated_bandwidth = 1 / t2 / np.pi
@@ -70,7 +70,12 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         world_rotation = -my_Xe.phase_perp * my_Xe.gamma2 + my_Xe.gamma * my_env.B0 - my_env.wd_y
         amplitude_ratio[i] = np.max(world_rotation[ts > 8 * t2]) / np.max(wr[ts > 8 * t2])
         phase_diff[i] = np.arccos(np.dot(wr[ts > 8 * t2], world_rotation[ts > 8 * t2]) / utils.l2(wr[ts > 8 * t2]) / utils.l2(world_rotation[ts > 8 * t2])) / np.pi * 180
-
+        
+        if plot_steps:
+            print('\nfreq: {}, steps: {}'.format(freq, steps))
+            my_Xe.plot_results(my_env)
+        
+        
     if plot_results:
         # plot results
         fig = plt.figure(figsize=(12, 8))
