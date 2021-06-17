@@ -106,7 +106,7 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
     ts = np.linspace(0, t_final, steps)
     Bnoise = np.zeros_like(ts)
     if Bnoise_amp != 0:
-        noise = utils.get_white_noise(Bnoise_amp, sampling_frequency, ts)
+        noise = utils.get_white_noise(Bnoise_amp * phy.G2T, sampling_frequency, ts)
         Bnoise = utils.butter_low_pass_filter(noise, filter_order, noise_cutoff_hz, sampling_frequency)
         
     # solver
