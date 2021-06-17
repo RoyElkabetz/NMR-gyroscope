@@ -147,15 +147,15 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
         fig = plt.figure(figsize=(12, 8))
         ax = plt.subplot()
         ax.set_title('World rotation dynamic range simulation')
-        ax.loglog(wr_amp, wr_measurements, 'o', label='$\Omega_r$')
-        ax.loglog(wr_amp, wr_amp, label='linear')
+        ax.loglog(wr_amp, wr_measurements, 'o', label='simulation')
+        ax.loglog(wr_amp, wr_amp, '--', label='perfect match')
         ax.set_ylabel('$\Omega_r^{calc}$ [rad / s]')
         ax.set_xlabel('$\Omega_r^{True}$ [rad / s]')
         ax.vlines(1 / np.sqrt(t1 * t2), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
                   color='red', label=r'$\frac{1}{\sqrt{T_1 * T_2}}$')
         if Bnoise_amp != 0:
             ax.vlines(np.abs(gyromagnetic * Bnoise_amp * phy.G2T), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
-                      color='black', label=r'$\gamma B^{noise}_{amplitude}$')
+                      color='black', label=r'$\gamma |B^{noise}|$')
         ax.grid(True)
         ax.legend()
         plt.tight_layout
