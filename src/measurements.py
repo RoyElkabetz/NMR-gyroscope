@@ -105,9 +105,6 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
     sampling_frequency = 1. / dt
     ts = np.linspace(0, t_final, steps)
     Bnoise = np.zeros_like(ts)
-    if Bnoise_amp != 0:
-        noise = utils.get_white_noise(Bnoise_amp * phy.G2T, sampling_frequency, ts)
-        Bnoise = utils.butter_low_pass_filter(noise, filter_order, noise_cutoff_hz, sampling_frequency)
         
     # solver
     for i, amp in enumerate(tqdm(wr_amp)):
@@ -119,6 +116,9 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
 
         # Environment parameters
         B0 = B0_amp * phy.G2T * np.ones_like(ts)  # Tesla
+        if Bnoise_amp != 0:
+            noise = utils.get_white_noise(Bnoise_amp * phy.G2T, sampling_frequency, ts)
+            Bnoise = utils.butter_low_pass_filter(noise, filter_order, noise_cutoff_hz, sampling_frequency)
         Ad_y = 2 * np.sqrt((1 / t1) * (1 / t2)) * np.ones_like(ts)  # rad / s
         wd_y = gyromagnetic * B0_amp * phy.G2T * np.ones_like(ts)  # rad / s
         Ad_x = np.zeros_like(ts)  # rad / s
