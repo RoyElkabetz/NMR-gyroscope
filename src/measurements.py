@@ -13,7 +13,7 @@ import xenon as xe
 import utils
 
 
-def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, freq_list=None, Bnoise_amp=0, plot_results=True, get_values=False, num_periods=2, points_in_period=1000):
+def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False):
 
     if freq_list is None:
         estimated_bandwidth = 1 / t2 / np.pi
@@ -99,7 +99,7 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         return freq_list, phase_diff, amplitude_ratio
 
 
-def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_amp, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, plot_results=True, get_values=False, dt=1, t_final=1000):
+def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_amp, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, dt=1, t_final=1000, plot_results=True, get_values=False):
     # world rotation parameters
     wr_measurements = np.zeros_like(wr_amp)
 
