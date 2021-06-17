@@ -13,7 +13,7 @@ import xenon as xe
 import utils
 
 
-def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, freq_list=None, Bnoise_amp=0, plot_results=True, get_values=False):
+def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, freq_list=None, Bnoise_amp=0, plot_results=True, get_values=False, num_periods=2, points_in_period=1000):
 
     if freq_list is None:
         estimated_bandwidth = 1 / t2 / np.pi
@@ -26,12 +26,16 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         # solver parameters
         freq = f                        # [Hz]
         period = 1 / freq               # [s]
-        num_periods = 2
         t_final = num_periods * period  # [s]
-        dt = period / 1000              # [s]
+        dt = period / points_in_period  # [s]
+        sampling_frequency = 1 / dt     # [Hz]
         steps = int(t_final // dt)
         ts1 = np.linspace(0, dt, 2)
         ts = np.linspace(0, t_final, steps)
+        Bnoise = np.zeros_like(ts)
+        if Bnoise_amp != 0:
+            noise = utils.get_white_noise(Bnoise_amp * phy.G2T, sampling_frequency, ts)
+            Bnoise = utils.butter_low_pass_filter(noise, filter_order, noise_cutoff_hz, sampling_frequency)  # Tesla
 
         # world rotation
         wr = wr_amp * np.sin(2 * np.pi * freq * ts)             # rad / s
@@ -40,10 +44,9 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         Rse = np.array([0, 0, 0.1]) * t1       # |K| / s
 
         # Environment parameters
-        B0 = 1 * phy.G2T * np.ones_like(ts)                             # Tesla
-        Bnoise = Bnoise_amp * phy.G2T * utils.smooth(np.random.randn(len(ts)))   # Tesla
+        B0 = B0_amp * phy.G2T * np.ones_like(ts)                             # Tesla
         Ad_y = 2 * np.sqrt((1 / t1) * (1 / t2)) * np.ones_like(ts)      # rad / s
-        wd_y = gyromagnetic * 1 * phy.G2T * np.ones_like(ts)            # rad / s
+        wd_y = gyromagnetic * B0_amp * phy.G2T * np.ones_like(ts)            # rad / s
         Ad_x = np.zeros_like(ts)                                        # rad / s
         wd_x = np.zeros_like(ts)                                        # rad / s
 
