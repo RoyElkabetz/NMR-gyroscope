@@ -153,6 +153,9 @@ def single_species_Open_Loop_dynamic_range_simulation(gyromagnetic, t1, t2, wr_a
         ax.set_xlabel('$\Omega_r^{True}$ [rad / s]')
         ax.vlines(1 / np.sqrt(t1 * t2), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
                   color='red', label=r'$\frac{1}{\sqrt{T_1 * T_2}}$')
+        if Bnoise_amp != 0:
+            ax.vlines(np.abs(gyromagnetic * Bnoise_amp * phy.G2T), ymin=np.min(wr_measurements), ymax=np.max(wr_measurements),
+                      color='black', label=r'$\gamma B^{noise}_{amplitude}$')
         ax.grid(True)
         ax.legend()
         plt.tight_layout
