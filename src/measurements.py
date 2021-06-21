@@ -13,7 +13,7 @@ import xenon as xe
 import utils
 
 
-def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False, plot_steps=False, plot_steps_PSD=False):
+def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False, plot_steps=False, plot_steps_PSD=False):
 
     if freq_list is None:
         estimated_bandwidth = 1 / t2 / np.pi
@@ -25,7 +25,7 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
     for i, f in enumerate(tqdm(freq_list)):
         # solver parameters
         freq = f                        # [Hz]
-        noise_cutoff_hz = freq * 1e3  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! understand why
+        noise_cutoff_hz = freq * 1e2  # leave enough flat area around the world signal in the frequency domain
         period = 1 / freq               # [s]
         t_final = num_periods * period  # [s]
         if t_final < 10 * t2:
