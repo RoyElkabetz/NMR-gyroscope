@@ -25,7 +25,7 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
     for i, f in enumerate(tqdm(freq_list)):
         # solver parameters
         freq = f                        # [Hz]
-        noise_cutoff_hz = freq * 1e3  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! understand why
+        noise_cutoff_hz = freq * 10  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! understand why
         period = 1 / freq               # [s]
         t_final = num_periods * period  # [s]
         if t_final < 10 * t2:
