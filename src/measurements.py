@@ -79,7 +79,7 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         if plot_steps_PSD:
             signle_list = [my_Xe.gamma * (B0 + Bnoise), wr]
             names = [r'$\gamma B$', r'$\Omega_r$']
-            utilse.psd_compare(signals_list=signle_list, sampling_frequency_hz, noise_amplitude=Bnoise_amp, names=names)
+            utilse.psd_compare(signals_list, sampling_frequency_hz, noise_amplitude=Bnoise_amp, names=names)
 
         
         
