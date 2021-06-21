@@ -13,7 +13,7 @@ import xenon as xe
 import utils
 
 
-def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False, plot_steps=False):
+def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0.01, B0_amp=1e-6, Bnoise_amp=0, noise_cutoff_hz=0.1, filter_order=2, num_periods=2, points_in_period=1000, freq_list=None, plot_results=True, get_values=False, plot_steps=False, plot_steps_PSD=False):
 
     if freq_list is None:
         estimated_bandwidth = 1 / t2 / np.pi
@@ -75,6 +75,12 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
         if plot_steps:
             print('\nfreq: {}, steps: {}, fs: {}'.format(freq, steps, sampling_frequency))
             my_Xe.plot_results(my_env)
+            
+        if plot_steps_PSD:
+            signle_list = [my_Xe.gamma * (B0 + Bnoise), wr]
+            names = [r'$\gamma B$', r'$\Omega_r$']
+            utilse.psd_compare(signals_list=signle_list, sampling_frequency_hz, noise_amplitude=Bnoise_amp, names=names):
+
         
         
     if plot_results:
