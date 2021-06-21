@@ -56,7 +56,7 @@ def butter_low_pass_filter(x, order, cutoff_hz, sampling_frequency_hz, plot_filt
     return filtered_x
 
 
-def psd_compare(signals_list, sampling_frequency_hz, noise_amplitude=None, names=None):
+def psd_compare(signals_list, sampling_frequency_hz, noise_amplitude=None, names=None, logx=False):
     """ Plot the Power Spectral Density (PSD) of all signals in the signals list
         in units of \sqrt(power) / \sqrt(Hz)
     """
@@ -71,10 +71,16 @@ def psd_compare(signals_list, sampling_frequency_hz, noise_amplitude=None, names
     ax = plt.subplot(111)
     ax.set_title('The Power Spectral Density (PSD) plot')
     for i in range(len(psd)):
-        if names is not None and len(names) == len(psd):
-            ax.semilogy(frequencies[i], psd[i], label=names[i])
+        if logx:
+            if names is not None and len(names) == len(psd):
+                ax.loglog(frequencies[i], psd[i], label=names[i])
+            else:
+                ax.loglog(frequencies[i], psd[i], label=str(i))
         else:
-            ax.semilogy(frequencies[i], psd[i], label=str(i))
+            if names is not None and len(names) == len(psd):
+                ax.semilogy(frequencies[i], psd[i], label=names[i])
+            else:
+                ax.semilogy(frequencies[i], psd[i], label=str(i))
     if noise_amplitude is not None:
         ax.hlines(noise_amplitude, frequencies[i].min(), frequencies[i].max(), label='noise amplitude')
     ax.set_ylabel(r'PSD $\left[\sqrt{\frac{a.u.}{Hz}}\right]$')
