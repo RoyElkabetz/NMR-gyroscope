@@ -28,7 +28,7 @@ This repository contains theory an simulations of Spin Exchange Optical Pumping 
 
 ## List of Notebooks
 
-| #   | Subject                                         | Colab             | Nbviwer               |
+| #   | Subject                                         | Colab             | Nbviewer               |
 |:----:|------------------------------------------------|:-----------------:|:---------------------:|
 | 0    | Gaussian White Noise simulation                | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/How_to_generate_White_Gaussian_Noise.ipynb)|
 | 1   | Single species NMR simulation without magnetic noise                   | [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/single_specie_experiment.ipynb)        | [![nbviewer](https://raw.githubusercontent.com/jupyter/design/master/logos/Badges/nbviewer_badge.svg)](https://nbviewer.jupyter.org/github/RoyElkabetz/SEOP-and-NMR/blob/main/src/single_specie_experiment.ipynb)|
