@@ -21,6 +21,17 @@ def single_species_Open_Loop_bandwidth_simualtion(gyromagnetic, t1, t2, wr_amp=0
 
     phase_diff = np.zeros_like(freq_list)
     amplitude_ratio = np.zeros_like(freq_list)
+    
+    periods = 1 / freq_list
+    final_times = num_periods * periods
+    for i in range(len(final_times)):
+        if final_times[i] < 10 * t2:
+            final_times[i] = 10 * t2
+    dts = periods / points_in_period
+    sampling_frequencies = 1 / dt
+    steps_of_all_simulations = np.array(t_final // dt, dtype=int)
+    if np.sum(steps_of_all_simulations > 5e4) > 0:
+        raise ValueError('To much points for simulation. Take smaller bandwidth or shortest simulatoin times !!!')
 
     for i, f in enumerate(tqdm(freq_list)):
         # solver parameters
