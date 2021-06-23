@@ -710,7 +710,10 @@ We can make the same calculation in the case where $M_{12}\neq 0$
 
 in that case the optimal drive amplitude is
 
-$$\Omega_d^{\text{optimal}} =\sqrt{\frac{4\Gamma_2\Gamma_1}{3}}\sqrt{1 + \left(M_{12}/\Gamma_2\right)^2}$$
+\begin{align}
+    \Omega_d^{\text{optimal}} =\sqrt{\frac{4\Gamma_2\Gamma_1}{3}}\sqrt{1 + \left(M_{12}/\Gamma_2\right)^2}\label{eq:optimal_drive}
+\end{align}
+
 
 Just for sports we can also solve the case of drive in $\hat{y}$, the Bloch equations in that case are
 
@@ -817,7 +820,7 @@ Now, if we solve for $\phi$ in the rotating frame of the drive, from eq.(\ref{eq
     \phi = \arctan{\left(\frac{\tilde{K}_y}{\tilde{K}_x}\right)}=\arctan{\left(-\frac{M_{12}}{\Gamma_2}\right)}
 \end{align}
 
-for small phase, where $M_{12}\ll 1$ the phase can be approximated with it zeroth order Taylor expansion $$\phi= -\frac{M_{12}}{\Gamma_2}$$
+for small phase, where $M_{12}\ll 1$ the phase can be approximated with its zeroth order Taylor expansion $$\phi= -\frac{M_{12}}{\Gamma_2}$$
 
 unfolding $M_{12}$ we get
 $$\phi= -\frac{\gamma_{Xe}B_0}{\Gamma_2}-\frac{\gamma_{Xe}b_{KS}S_z}{\Gamma_2}-\frac{\omega_r}{\Gamma_2}+\frac{\omega_{rf}}{\Gamma_2}$$
@@ -850,6 +853,72 @@ and finally the world rotation in an open-loop setting is given by
 
 
 \subsection{Dual species closed-loop NMRG scheme}
+In a Closed-Loop scheme we keep the phase of the spins with respect to the drive constant. To be partially-consistent with Walker in \cite{walker2016spin}, we define the constant phase difference as $\beta$. Then, $\phi-\beta$ would be the actual accumulated phase of the drive. But, different from Walker we will solve the dynamics in the rotating frame. This means that in our case $\phi$ stands for the phase accumulated between the drive and the spins in the rotating frame of reference of the spins, so in resonance it is meant to be small, $\phi\approx 0$. Walker solve the dynamics in the lab frame of reference so there, $\phi\approx \frac{\pi}{2}$ for optimal drive (explained in \href{https://en.wikipedia.org/wiki/Harmonic_oscillator#Sinusoidal_driving_force}{sine driven dumped harmonic oscillator}). Also, where Walker uses $\Omega_z$ we substitute $M_{12}=\Omega_z-\Omega_d$. 
+
+Finally, Walker define a constant phase difference (in the lab frame) $\phi-\beta\approx \frac{\pi}{2}$ so he multiply the drive with $\sin{\left(\phi-\beta\right)}\approx 1$. In our case (in the rotating frame) $\phi-\beta\approx 0$ so we need to multiply the drive with $\cos{\left(\phi-\beta\right)}\approx 1$.
+
+Therefore, the previous solution to $\phi$ does not hold anymore so we need to solve the Closed-Loop NMRG dynamics in a formal way from the top. Then, in the rotating frame (from eq.(\ref{eq:Bloch_equations_y_drive}, we drop the tilde sign for convenience) )
+
+\begin{align}
+    \frac{d K_{+}}{dt} &= \frac{d K_{x}}{dt} + i\frac{d K_{y}}{dt}\\
+    \frac{d }{dt}\left( K_{\perp}e^{-i\phi}\right) &= -\Gamma_2 K_x + M_{12} K_y - \frac{\Omega_d}{2} \cos{\left(\phi-\beta\right)}K_z + iM_{21}K_x - i\Gamma_2 K_y\\
+    e^{-i\phi}\frac{d K_{\perp}}{dt} + K_{\perp}\frac{d }{dt}e^{-i\phi} &= -\left(\Gamma_2 + iM_{12}\right)K_x -i\left(\Gamma_2 + iM_{12}\right)K_y - \frac{\Omega_d}{2} \cos{\left(\phi-\beta\right)}K_z \\
+    \left(\frac{d K_{\perp}}{dt} -i K_{\perp}\frac{d \phi}{dt}\right)e^{-i\phi} &= -\left(\Gamma_2 + iM_{12}\right)\left(K_x +iK_y\right) - \frac{\Omega_d}{2}\cos{\left(\phi-\beta\right)} K_z \\
+    \left(\frac{d K_{\perp}}{dt} -i K_{\perp}\frac{d \phi}{dt}\right)e^{-i\phi} &= -\left(\Gamma_2 + iM_{12}\right)K_{\perp}e^{-i\phi} - \frac{\Omega_d}{2} \cos{\left(\phi-\beta\right)}K_z \\
+    \frac{d K_{\perp}}{dt} -i K_{\perp}\frac{d \phi}{dt} &= -\left(\Gamma_2 + iM_{12}\right)K_{\perp} - \frac{\Omega_d}{2}\cos{\left(\phi-\beta\right)} K_z e^{i\phi} \\
+\end{align}
+Now we break the equation into real and imaginary parts such that
+
+\begin{align}
+      K_{\perp}\frac{d \phi}{dt} &=  M_{12}K_{\perp} +\frac{\Omega_d}{2} K_z \cos{\left(\phi-\beta\right)}\sin{\left(\phi\right)}\\
+     \frac{d K_{\perp}}{dt}  &= -\Gamma_2 K_{\perp} - \frac{\Omega_d}{2} K_z \cos{\left(\phi-\beta\right)}\cos{\left(\phi\right)}
+\end{align}
+
+arranging the terms, we get
+
+\begin{align}
+      \frac{d \phi}{dt} &=  M_{12} +\frac{\Omega_d}{2} \frac{K_z}{K_{\perp}} \cos{\left(\phi-\beta\right)}\sin{\left(\phi\right)}\\
+     \frac{d K_{\perp}}{dt}  &= -\Gamma_2 K_{\perp} - \frac{\Omega_d}{2} K_z \cos{\left(\phi-\beta\right)}\cos{\left(\phi\right)}
+\end{align}
+
+recall
+\begin{align}
+     \cos{\left(\phi-\beta\right)}\sin{\left(\phi\right)} &=\frac{1}{2}\sin{\left(2\phi-\beta\right)} - \frac{1}{2}\sin{\left(-\beta\right)} = \frac{1}{2}\sin{\left(\beta\right)}\\
+     \cos{\left(\phi-\beta\right)}\cos{\left(\phi\right)} &= \frac{1}{2}\cos{\left(-\beta\right)} - \frac{1}{2}\cos{\left(2\phi-\beta\right)} = \frac{1}{2}\cos{\left(\beta\right)}
+\end{align}
+where twice the phase oscillations, $2\phi$, quickly average to zero over time so we end up with
+
+\begin{align}
+      \frac{d \phi}{dt} &=  M_{12} +\frac{\Omega_d}{4} \frac{K_z}{K_{\perp}}\sin{\left(\beta\right)}\\
+     \frac{d K_{\perp}}{dt}  &= -\Gamma_2 K_{\perp} - \frac{\Omega_d}{4} K_z \cos{\left(\beta\right)}
+\end{align}
+
+Therefore, solving for steady state transverse polarization 
+
+\begin{align}
+     K_{\perp} &= -\frac{\Omega_d}{4\Gamma_2} K_z \cos{\left(\beta\right)}
+\end{align}
+such that
+
+\begin{align}
+      \frac{d \phi}{dt} &=  M_{12} -\Gamma_2 \tan{\left(\beta\right)}
+\end{align}
+
+while, the longitudinal steady state polarization is given by
+\begin{align}
+      0=\frac{d K_z}{dt} &=  -\frac{\Omega_d}{2} \cos{\left(\phi-\beta\right)}K_x - \Gamma_1 K_z + R_{se}\\
+      0 &=  -\frac{\Omega_d}{2} \cos{\left(\phi-\beta\right)}\sqrt{K_{\perp}^2-K_y^2} - \Gamma_1 K_z + R_{se}\\
+      0 &=  -\frac{\Omega_d}{2} \cos{\left(\phi-\beta\right)}\sqrt{\frac{\Omega_d^2}{16\Gamma_2^2} K_z^2 \cos^2{\left(\beta\right)}-K_y^2} - \Gamma_1 K_z + R_{se}\\
+      0 &=  -\frac{\Omega_d^2\cos{\left(\beta\right)}\cos{\left(\phi-\beta\right)}}{8\Gamma_2}\sqrt{1 - \left(\frac{4\Gamma_1}{\Omega_d \cos{\left(\beta\right)}}\right)^2\left(\frac{K_y}{K_z}\right)^2}K_z - \Gamma_1 K_z + R_{se}\\
+      0 &=  -\frac{\Omega_d^2\cos{\left(\beta\right)}}{16\Gamma_2}\sqrt{1 - \left(\frac{4\Gamma_1}{\Omega_d \cos{\left(\beta\right)}}\right)^2\left(\frac{K_y}{K_z}\right)^2}K_z - \Gamma_1 K_z + R_{se}\\
+      K_z &= \frac{R_{se}}{\Gamma_1 + \frac{\Omega_d^2\cos^2{\left(\beta\right)}}{16\Gamma_2}\sqrt{1 - \left(\frac{4\Gamma_1}{\Omega_d \cos{\left(\beta\right)}}\right)^2\left(\frac{K_y}{K_z}\right)^2}}
+\end{align}
+
+recall that we define the drive to be in the $\hat{y}$ direction so we maximize the $K_x$ polarization and minimize $K_y$ so in the case of optimal drive (eq.(\ref{eq:optimal_drive})) and small $\beta$ we get that
+
+\begin{align}
+      \boxed{K_z \approx \frac{R_{se}}{\Gamma_1 + \frac{\Omega_d^2\cos^2{\left(\beta\right)}}{16\Gamma_2}}}
+\end{align}
 
 
 \bibliographystyle{alpha}
