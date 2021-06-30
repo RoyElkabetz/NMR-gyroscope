@@ -832,7 +832,9 @@ all these parameters could in general be time dependent. Notice that in the phas
 
 
 \subsection{Dual species open-loop NMRG scheme}
-Having system with two species, Xe129 and Xe131, we can compute the world rotation as follows
+Having a system with two species, Xe129 and Xe131, we can compute the world rotation as follows
+
+
 
 \begin{align}
     \phi_{129} &= -\frac{\gamma^{129}_{Xe}B_0}{\Gamma_2^{129}}-\frac{\gamma^{129}_{Xe}B_{noise}}{\Gamma_2^{129}}-\frac{\gamma^{129}_{Xe}b_{KS}S_z}{\Gamma_2^{129}}-\frac{\omega_r}{\Gamma_2^{129}}+\frac{\omega^{129}_{rf}}{\Gamma_2^{129}}\\
@@ -919,6 +921,8 @@ recall that we define the drive to be in the $\hat{y}$ direction so we maximize 
 \begin{align}
       \boxed{K_z \approx \frac{R_{se}}{\Gamma_1 + \frac{\Omega_d^2\cos^2{\left(\beta\right)}}{16\Gamma_2}}}
 \end{align}
+
+notice that we got the same results as in \cite{walker2016spin} up to few modification caused because we solve the dynamics in rotating frame of reference. The Bloch equations in the lab frame of reference would have drive amplitude $\Omega_d$ instead of $\frac{\Omega_d}{2}$ and $\beta\to \beta - \frac{\pi}{2}$. These changes will results is a lab frame of reference solution as in \cite{walker2016spin}. 
 
 \subsection{Closing the Loop}
 
