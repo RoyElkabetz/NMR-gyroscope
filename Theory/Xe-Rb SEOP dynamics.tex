@@ -11,6 +11,7 @@
 % Useful packages
 \usepackage{amsmath}
 \usepackage{graphicx}
+\graphicspath{ {./Figures/} }
 \usepackage[colorlinks=true, allcolors=blue]{hyperref}
 
 %\title{Your Paper}
@@ -834,8 +835,6 @@ all these parameters could in general be time dependent. Notice that in the phas
 \subsection{Dual species open-loop NMRG scheme}
 Having a system with two species, Xe129 and Xe131, we can compute the world rotation as follows
 
-
-
 \begin{align}
     \phi_{129} &= -\frac{\gamma^{129}_{Xe}B_0}{\Gamma_2^{129}}-\frac{\gamma^{129}_{Xe}B_{noise}}{\Gamma_2^{129}}-\frac{\gamma^{129}_{Xe}b_{KS}S_z}{\Gamma_2^{129}}-\frac{\omega_r}{\Gamma_2^{129}}+\frac{\omega^{129}_{rf}}{\Gamma_2^{129}}\\
     \phi_{131} &= -\frac{\gamma^{131}_{Xe}B_0}{\Gamma_2^{131}}-\frac{\gamma^{131}_{Xe}B_{noise}}{\Gamma_2^{131}}-\frac{\gamma^{131}_{Xe}b_{KS}S_z}{\Gamma_2^{131}}-\frac{\omega_r}{\Gamma_2^{131}}+\frac{\omega^{131}_{rf}}{\Gamma_2^{131}}
@@ -850,8 +849,17 @@ Then, subtracting the two equations we get
 and finally the world rotation in an open-loop setting is given by 
 
 \begin{align}
-    \omega_r &= \left[\frac{ \gamma^{129}_{Xe} \gamma^{131}_{Xe} }{\gamma^{129}_{Xe} - \gamma^{131}_{Xe}}\right]\left[\frac{1}{\gamma^{129}_{Xe}}\left(\phi_{129}\Gamma_2^{129}-\omega^{129}_{rf}\right) - \frac{1}{\gamma^{131}_{Xe}}\left(\phi_{131}\Gamma_2^{131}-\omega^{131}_{rf}\right)\right]
+    \omega_r &= \left[\frac{ \gamma^{129}_{Xe} \gamma^{131}_{Xe} }{\gamma^{129}_{Xe} - \gamma^{131}_{Xe}}\right]\left[\frac{1}{\gamma^{129}_{Xe}}\left(\phi_{129}\Gamma_2^{129}-\omega^{129}_{rf}\right) - \frac{1}{\gamma^{131}_{Xe}}\left(\phi_{131}\Gamma_2^{131}-\omega^{131}_{rf}\right)\right]\label{eq:open-loop-world-rotation}
 \end{align}
+
+A scheme of such dual species open-loop system is illustrated in Fig.(\ref{fig:open_loop_scheme}).
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{Theory/Figures/NMRG_open_loop_scheme.png}
+\caption{Dual species NMRG open-loop scheme. The Alkali signal is measured in a Balanced Photo detector (BPD) which is then inserted into a Lock-in amplifier (LIA) with a parametric modulation ($B^{ESR}_t$) reference. The amplitude extracted from the LIA channel is the Xenon dynamic which is then been splitted and inserted into two more LIAs with two NMR drive references ($NMR^{129}_y\,NMR^{131}_y$) one for each Xenon. The two phases extracted from the LIAs are the two Xenon phase differences from their drive signals. These phase signals can be used to compute the world rotation in $\hat{z}$ following Eq.(\ref{eq:open-loop-world-rotation}). $B_z$ and $B_{\delta z}$ are the DC and modulation of the longitudinal magnetic field.}
+\label{fig:open_loop_scheme}
+\end{figure}
 
 
 \subsection{Dual species closed-loop NMRG scheme}
@@ -922,9 +930,25 @@ recall that we define the drive to be in the $\hat{y}$ direction so we maximize 
       \boxed{K_z \approx \frac{R_{se}}{\Gamma_1 + \frac{\Omega_d^2\cos^2{\left(\beta\right)}}{16\Gamma_2}}}
 \end{align}
 
-notice that we got the same results as in \cite{walker2016spin} up to few modification caused because we solve the dynamics in rotating frame of reference. The Bloch equations in the lab frame of reference would have drive amplitude $\Omega_d$ instead of $\frac{\Omega_d}{2}$ and $\beta\to \beta - \frac{\pi}{2}$. These changes will results is a lab frame of reference solution as in \cite{walker2016spin}. 
+notice that we got the same results as in \cite{walker2016spin} up to few modification caused because we solve the dynamics in rotating frame of reference. The Bloch equations in the lab frame of reference would have drive amplitude $\Omega_d$ instead of $\frac{\Omega_d}{2}$ and $\beta\to \beta - \frac{\pi}{2}$. These changes will results in a lab frame of reference solution 
+
+\begin{align}
+    \boxed{
+    \begin{aligned}
+       K_{\perp} &= \frac{\Omega_d}{2\Gamma_2} K_z \cos{\left(\beta\right)}\\
+      K_z &= \frac{R_{se}}{\Gamma_1 + \frac{\Omega_d^2\cos^2{\left(\beta\right)}}{4\Gamma_2}}\\
+      \frac{d \phi}{dt} &=  \omega_0 -\Gamma_2 \tan{\left(\beta\right)}
+    \end{aligned}}
+\end{align}
+
+same as in \cite{walker2016spin}. we can now see that when the gyro is in a steady state the averaged spin is tipped from the $\hat{z}$ axis with an angle
+
+\begin{align}
+    \Theta = \arctan\left(\frac{K_{\perp}}{K_z}\right)=\frac{\Omega_d \cos{\left(\beta\right)}}{2\Gamma_2}
+\end{align}
 
 \subsection{Closing the Loop}
+Different from the open-loop scheme 
 
 
 \bibliographystyle{alpha}
