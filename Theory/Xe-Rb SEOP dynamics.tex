@@ -857,7 +857,7 @@ A scheme of such dual species open-loop system is illustrated in Fig.(\ref{fig:o
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.9\textwidth]{Theory/Figures/NMRG_open_loop_scheme.png}
-\caption{Dual species NMRG open-loop scheme. The Alkali signal is measured in a Balanced Photo detector (BPD) which is then inserted into a Lock-in amplifier (LIA) with a parametric modulation ($B^{ESR}_t$) reference. The amplitude extracted from the LIA channel is the Xenon dynamic which is then been splitted and inserted into two more LIAs with two NMR drive references ($NMR^{129}_y\,NMR^{131}_y$) one for each Xenon. The two phases extracted from the LIAs are the two Xenon phase differences from their drive signals. These phase signals can be used to compute the world rotation in $\hat{z}$ following Eq.(\ref{eq:open-loop-world-rotation}). $B_z$ and $B_{\delta z}$ are the DC and modulation of the longitudinal magnetic field.}
+\caption{Dual species NMRG open-loop scheme. The Alkali signal is measured in a Balanced Photo detector (BPD) which is then inserted into a Lock-in amplifier (LIA) with a parametric modulation ($B^{ESR}_t$) reference. The amplitude extracted from the LIA channel is the Xenon dynamic which is then been splitted and inserted into two more LIAs with two NMR drive references ($NMR^{129}_y\,NMR^{131}_y$) one for each Xenon. The two phases extracted from the LIAs are the two Xenon phase differences from their drive signals. These phase signals can be used to compute the world rotation in $\hat{z}$ following eq.(\ref{eq:open-loop-world-rotation}). $B_z$ and $B_{\delta z}$ are the DC and modulation of the longitudinal magnetic field.}
 \label{fig:open_loop_scheme}
 \end{figure}
 
@@ -938,7 +938,7 @@ notice that we got the same results as in \cite{walker2016spin} up to few modifi
        K_{\perp} &= \frac{\Omega_d}{2\Gamma_2} K_z \cos{\left(\beta\right)}\\
       K_z &= \frac{R_{se}}{\Gamma_1 + \frac{\Omega_d^2\cos^2{\left(\beta\right)}}{4\Gamma_2}}\\
       \frac{d \phi}{dt} &=  \omega_0 -\Gamma_2 \tan{\left(\beta\right)}
-    \end{aligned}}
+    \end{aligned}}\label{eq:lab-farame-solution}
 \end{align}
 
 same as in \cite{walker2016spin}. we can now see that when the gyro is in a steady state the averaged spin is tipped from the $\hat{z}$ axis with an angle
@@ -948,8 +948,18 @@ same as in \cite{walker2016spin}. we can now see that when the gyro is in a stea
 \end{align}
 
 \subsection{Closing the Loop}
-Different from the open-loop scheme 
+Now recall that $\beta$ is the phase leg of the drive with respect to the gyro so we can write it as follows $\theta=\phi - \beta$, where now $\theta$ is the phase of the drive in the lab frame and $\phi$ is the gyro phase also in the lab frame. for small enough phase difference between the two, we can write the phase preces
+sion eq.(\ref{eq:lab-farame-solution}) as follows
 
+\begin{align}
+    \frac{d\phi}{dt} &= \omega_0 - \Gamma_2\left(\beta\right)\\
+    &= \omega_0 + \Gamma_2\left(\theta - \phi\right)
+\end{align}
+
+\begin{align}
+    \frac{d\theta}{dt} &= \omega_0 + g\left(\beta - \beta_0\right)\\
+    \frac{d\beta}{dt} &=
+\end{align}
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
