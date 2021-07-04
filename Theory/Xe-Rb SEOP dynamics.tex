@@ -969,9 +969,9 @@ We can compute the small deviation feedback relation for the drive using eqs.(\r
 
 \begin{align}
     \frac{d\theta}{dt} &=  \frac{d\phi}{dt} - \frac{d\beta}{dt}\\
-    \frac{d\theta}{dt} &=  \frac{d\phi}{dt} - \frac{d\epsilon}{dt}\\
-    \frac{d\theta}{dt} &=  \Omega_z -\Gamma_2 \left(\beta_0 + \epsilon\left(t\right)\right) - \frac{d\epsilon}{dt}\\
-    \frac{d\theta}{dt} &=  \omega_0 -\frac{\epsilon\left(t\right)}{T_2}  - \frac{d\epsilon}{dt}
+    \frac{d\theta}{dt} &=  \frac{d\phi}{dt} - \frac{d\epsilon\left(t\right)}{dt}\\
+    \frac{d\theta}{dt} &=  \Omega_z -\Gamma_2 \left(\beta_0 + \epsilon\left(t\right)\right) - \frac{d\epsilon \left(t\right)}{dt}\\
+    \frac{d\theta}{dt} &=  \omega_0 -\frac{\epsilon\left(t\right)}{T_2}  - \frac{d\epsilon\left(t\right)}{dt}
 \end{align}
 where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.
 
@@ -983,6 +983,7 @@ where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.
 \label{fig:nmrg_phase_dynamics}
 \end{figure}
 
+Integrating the last equation we get the phase addition to the drive
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
