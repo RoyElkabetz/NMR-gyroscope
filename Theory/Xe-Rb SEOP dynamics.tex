@@ -948,8 +948,7 @@ same as in \cite{walker2016spin}. we can now see that when the gyro is in a stea
 \end{align}
 
 \subsection{Closing the Loop}
-Now recall that $\beta$ is the phase leg of the drive with respect to the gyro so we can write it as follows $\theta=\phi - \beta$, where now $\theta$ is the phase of the drive and $\phi$ is the gyro phase, both in the lab frame of reference (see Fig.\ref{fig:nmrg_phase_dynamics}). For small enough phase difference between the two, we can write the phase preces
-sion eq.(\ref{eq:lab-farame-solution}) as follows
+Now recall that $\beta$ is the phase leg of the drive with respect to the gyro so we can write it as follows $\theta=\phi - \beta$, where now $\theta$ is the phase of the drive and $\phi$ is the gyro phase, both in the lab frame of reference (see Fig.\ref{fig:nmrg_phase_dynamics}). For small enough phase difference between the two, we can write the phase precession in eq.(\ref{eq:lab-farame-solution}) as follows
 
 \begin{align}
     \frac{d\phi}{dt} &= \omega_0 - \Gamma_2\left(\beta\right)\\
@@ -958,14 +957,16 @@ sion eq.(\ref{eq:lab-farame-solution}) as follows
 \end{align}
 
 
-In a closed-loop NMRG configuration we feedback the drive magnetic field such that $\beta$ is held constant $\beta=\beta_0$. Although, in the most general case the phase leg would be
+In a closed-loop NMRG configuration we use negative feedback to lock the phase leg $\beta$ to a constant value $\beta=\beta_0$. Though, in the most general case the phase leg would be
 
 \begin{align}
     \beta\left(t\right) &= \beta_0 + \epsilon\left(t\right)
     \label{eq:phase_leg}
 \end{align}
 
+{\color{green}
 We can compute the small deviation feedback relation for the drive using eqs.(\ref{eq:small_phase_dev})(\ref{eq:phase_leg})
+
 
 \begin{align}
     \frac{d\theta}{dt} &=  \frac{d\phi}{dt} - \frac{d\beta}{dt}\\
@@ -973,7 +974,7 @@ We can compute the small deviation feedback relation for the drive using eqs.(\r
     \frac{d\theta}{dt} &=  \Omega_z -\Gamma_2 \left(\beta_0 + \epsilon\left(t\right)\right) - \frac{d\epsilon \left(t\right)}{dt}\\
     \frac{d\theta}{dt} &=  \omega_0 -\frac{\epsilon\left(t\right)}{T_2}  - \frac{d\epsilon\left(t\right)}{dt}
 \end{align}
-where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.
+where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.}
 
 
 \begin{figure}[h]
@@ -983,7 +984,13 @@ where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.
 \label{fig:nmrg_phase_dynamics}
 \end{figure}
 
-Integrating the last equation we get the phase addition to the drive
+There are few ways to use feedback in the dual-species NMRG configuration: (1) We can keep the gyro phase ($\phi$) locked to a clock-derived NMR drive phase ($\theta$) by measuring the phase difference between the two ($\beta$) and using negative feedback to change the bias magnetic field ($B_0$) in a way that locks the phase difference to a constant value ($\beta_0$) using a PID controller following the next relation
+
+\begin{align}
+     B_{0}^{\left(t+1\right)} &= B_{0}^{\left(t\right)} + \underset{\delta B_{0}^{\left(t\right)}}{\underbrace{K_p \left[ \epsilon\left(t\right) + \frac{1}{T_i} \int_{t_i}^{t} \epsilon\left(t'\right)dt' + T_{d} \frac{d \epsilon\left(t\right)}{dt} \right]}}
+\end{align}
+
+where $T_i$ and $T_d$ are the integration and derivative times respectively.
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
