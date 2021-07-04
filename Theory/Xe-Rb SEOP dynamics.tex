@@ -984,13 +984,13 @@ where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.}
 \label{fig:nmrg_phase_dynamics}
 \end{figure}
 
-There are few ways to use feedback in the dual-species NMRG configuration: (1) We can keep the gyro phase ($\phi$) locked to a clock-derived NMR drive phase ($\theta$) by measuring the phase difference between the two ($\beta$) and using negative feedback to change the bias magnetic field ($B_0$) in a way that locks the phase difference to a constant value ($\beta_0$) using a PID controller following the next relation
+There are few ways to use feedback in a dual-species NMRG configuration. One way is to lock the bias magnetic field to match a clock-derived NMR Xenon drive signal. We do that by keeping the gyro phase ($\phi$) locked to the NMR drive phase ($\theta$) by measuring the phase difference between the two ($\beta$) and using negative feedback to change the bias magnetic field ($B_0$) in a way that locks the phase difference to a constant value ($\beta_0$) using a PID controller following the next relation
 
 \begin{align}
      B_{0}^{\left(t+1\right)} &= B_{0}^{\left(t\right)} - \underset{\delta B_{0}^{\left(t\right)}}{\underbrace{K_p \left[ \epsilon\left(t\right) + \frac{1}{T_i} \int_{t_i}^{t} \epsilon\left(t'\right)dt' + T_{d} \frac{d \epsilon\left(t\right)}{dt} \right]}}
 \end{align}
 
-where $T_i$ and $T_d$ are the integration and derivative times respectively. We can extract $\epsilon$ from the measurement of $\beta$ following eq.(\ref{eq:phase_leg}).  
+where $T_i$ and $T_d$ are the integration and derivative times respectively. We can extract $\epsilon\left(t\right)$ from the measurement of $\beta$ following eq.(\ref{eq:phase_leg}). Another way is to use the same technique to lock the NMR drive frequency. 
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
