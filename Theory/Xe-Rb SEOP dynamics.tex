@@ -948,18 +948,41 @@ same as in \cite{walker2016spin}. we can now see that when the gyro is in a stea
 \end{align}
 
 \subsection{Closing the Loop}
-Now recall that $\beta$ is the phase leg of the drive with respect to the gyro so we can write it as follows $\theta=\phi - \beta$, where now $\theta$ is the phase of the drive in the lab frame and $\phi$ is the gyro phase also in the lab frame. for small enough phase difference between the two, we can write the phase preces
+Now recall that $\beta$ is the phase leg of the drive with respect to the gyro so we can write it as follows $\theta=\phi - \beta$, where now $\theta$ is the phase of the drive and $\phi$ is the gyro phase, both in the lab frame of reference (see Fig.\ref{fig:nmrg_phase_dynamics}). For small enough phase difference between the two, we can write the phase preces
 sion eq.(\ref{eq:lab-farame-solution}) as follows
 
 \begin{align}
     \frac{d\phi}{dt} &= \omega_0 - \Gamma_2\left(\beta\right)\\
     &= \omega_0 + \Gamma_2\left(\theta - \phi\right)
+    \label{eq:small_phase_dev}
 \end{align}
 
+
+In a closed-loop NMRG configuration we feedback the drive magnetic field such that $\beta$ is held constant $\beta=\beta_0$. Although, in the most general case the phase leg would be
+
 \begin{align}
-    \frac{d\theta}{dt} &= \omega_0 + g\left(\beta - \beta_0\right)\\
-    \frac{d\beta}{dt} &=
+    \beta\left(t\right) &= \beta_0 + \epsilon\left(t\right)
+    \label{eq:phase_leg}
 \end{align}
+
+We can compute the small deviation feedback relation for the drive using eqs.(\ref{eq:small_phase_dev})(\ref{eq:phase_leg})
+
+\begin{align}
+    \frac{d\theta}{dt} &=  \frac{d\phi}{dt} - \frac{d\beta}{dt}\\
+    \frac{d\theta}{dt} &=  \frac{d\phi}{dt} - \frac{d\epsilon}{dt}\\
+    \frac{d\theta}{dt} &=  \Omega_z -\Gamma_2 \left(\beta_0 + \epsilon\left(t\right)\right) - \frac{d\epsilon}{dt}\\
+    \frac{d\theta}{dt} &=  \omega_0 -\frac{\epsilon\left(t\right)}{T_2}  - \frac{d\epsilon}{dt}
+\end{align}
+where $\omega_0=\Omega_z - \Gamma_2\beta_0$ is the clock-derived frequency.
+
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.5\textwidth]{Theory/Figures/NMRG_phase_dynamics.png}
+\caption{NMRG phase dynamics in the lab frame of reference illustration. $\phi$ and $\theta$ are the gyro and drive phases respectively, while $\beta$ is the phase leg of the drive from the gyro.}
+\label{fig:nmrg_phase_dynamics}
+\end{figure}
+
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
