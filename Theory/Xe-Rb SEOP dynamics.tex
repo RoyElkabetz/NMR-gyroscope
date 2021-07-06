@@ -863,11 +863,12 @@ A scheme of such dual species open-loop system is illustrated in Fig.(\ref{fig:o
 
 
 \subsection{Dual species closed-loop NMRG scheme}
+{\color{green}
 In a Closed-Loop scheme we keep the phase of the spins with respect to the drive constant. To be partially-consistent with Walker in \cite{walker2016spin}, we define the constant phase difference as $\beta$. Then, $\phi-\beta$ would be the actual accumulated phase of the drive. But, different from Walker we will solve the dynamics in the rotating frame. This means that in our case $\phi$ stands for the phase accumulated between the drive and the spins in the rotating frame of reference of the spins, so in resonance it is meant to be small, $\phi\approx 0$. Walker solve the dynamics in the lab frame of reference so there, $\phi\approx \frac{\pi}{2}$ for optimal drive (explained in \href{https://en.wikipedia.org/wiki/Harmonic_oscillator#Sinusoidal_driving_force}{sine driven dumped harmonic oscillator}). Also, where Walker uses $\Omega_z$ we substitute $M_{12}=\Omega_z-\Omega_d$. 
 
 Finally, Walker define a constant phase difference (in the lab frame) $\phi-\beta\approx \frac{\pi}{2}$ so he multiply the drive with $\sin{\left(\phi-\beta\right)}\approx 1$. In our case (in the rotating frame) $\phi-\beta\approx 0$ so we need to multiply the drive with $\cos{\left(\phi-\beta\right)}\approx 1$.
 
-Therefore, the previous solution to $\phi$ does not hold anymore so we need to solve the Closed-Loop NMRG dynamics in a formal way from the top. Then, in the rotating frame (from eq.(\ref{eq:Bloch_equations_y_drive}, we drop the tilde sign for convenience) )
+Therefore, the previous solution to $\phi$ does not hold anymore so we need to solve the Closed-Loop NMRG dynamics in a formal way from the top. Then, in the rotating frame (from eq.(\ref{eq:Bloch_equations_y_drive}, we drop the tilde sign for convenience) )}
 
 \begin{align}
     \frac{d K_{+}}{dt} &= \frac{d K_{x}}{dt} + i\frac{d K_{y}}{dt}\\
@@ -991,6 +992,11 @@ There are few ways to use feedback in a dual-species NMRG configuration. One way
 \end{align}
 
 where $T_i$ and $T_d$ are the integration and derivative times respectively. We can extract $\epsilon\left(t\right)$ from the measurement of $\beta$ following eq.(\ref{eq:phase_leg}). Another way is to use the same technique to lock the NMR drive frequency. 
+
+\subsection{PID}
+\href{https://jckantor.github.io/CBE30338/04.03-PID_Control_with_Bumpless_Transfer.html}{PID generator with python}
+
+{\color{red} $\beta_t = \phi_t - \theta_t = \phi_t - \phi_{t-1} = \Delta \phi$}
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
