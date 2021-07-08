@@ -1,4 +1,6 @@
-# SEOP-and-NMR
+# NMR gyroscope
+
+
 
 
 This repository contains theory an simulations of Spin Exchange Optical Pumping (SEOP) and Nuclear Magnetic Resonance (NMR) physics. 
