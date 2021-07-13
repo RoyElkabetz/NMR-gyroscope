@@ -30,14 +30,14 @@
 The Block equation for the Xe spin are
 
 \begin{align}
-    \frac{d \mathbf{K}}{d t} &= -\left[\gamma_{Xe}\left( \mathbf{B}_0 + \mathbf{B}_d \cos{(\omega_{rf} t)}\right) + b_{KS} \mathbf{S}\right] \times\mathbf{K}  +\Gamma_{se} \left( \mathbf{S} - \mathbf{K}\right) - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{K}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{K}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{K}\right)
+    \frac{d \mathbf{K}}{d t} &= -\gamma_{Xe}\left[\left( \mathbf{B}_0 + \mathbf{B}_d \cos{(\omega_{rf} t)}\right) + b_{KS} \mathbf{S}\right] \times\mathbf{K}  +\Gamma_{se} \left( \mathbf{S} - \mathbf{K}\right) - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{K}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{K}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{K}\right)
 \end{align}
 
 Let us assume that $b_{KS} \mathbf{S}$ is part of the DC field $\mathbf{B}_0=B_0 \hat{z}$, that $\Gamma_{se} \left( \mathbf{S} - \mathbf{K}\right)=\left(\begin{array}{c}0\\0\\R_{se}\end{array}\right)$ and that the drive is $$\mathbf{B}_d \cos{(\omega_{rf} t)} =B_d \cos{(\omega_{rf} t)}\hat{x}$$ .
 
 Thus, we end up with the next Bloch equation
 \begin{align}
-    \frac{d \mathbf{K}}{d t} &= -\left[\gamma_{Xe}\left( B_0\hat{z} + B_d \cos{(\omega_{rf} t)}\hat{x}\right) \right] \times\mathbf{K}  +R_{se}\hat{z} - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{K}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{K}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{K}\right)\\
+    \frac{d \mathbf{K}}{d t} &= -\gamma_{Xe}\left[\left( B_0\hat{z} + B_d \cos{(\omega_{rf} t)}\hat{x}\right) \right] \times\mathbf{K}  +R_{se}\hat{z} - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{K}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{K}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{K}\right)\\
     &= -\gamma_{Xe} \begin{vmatrix}
         \hat{x}                     & \hat{y}       & \hat{z} \\
          B_d\cos{(\omega_{rf} t)}   & 0             & B_0  \\
@@ -997,6 +997,65 @@ where $T_i$ and $T_d$ are the integration and derivative times respectively. We 
 \href{https://jckantor.github.io/CBE30338/04.03-PID_Control_with_Bumpless_Transfer.html}{PID generator with python}
 
 {\color{red} $\beta_t = \phi_t - \theta_t = \phi_t - \phi_{t-1} = \Delta \phi$}
+
+\section{Alkali Dynamics - ESR}
+The Block equation for the Alkali (Rb87) spin are given by
+
+\begin{align}
+    \frac{d \mathbf{S}}{d t} &= -\gamma_{A}\left[\left( B_0 + B_1 \cos{(\omega_{1} t)}\right)\hat{z} + b_{SK} \mathbf{K}\right] \times\mathbf{S}  +\Gamma_{se} \left( \mathbf{K} - \mathbf{S}\right) - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{S}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{S}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{S}\right)
+\end{align}
+
+In a matrix form
+
+\begin{align}
+    \left(\begin{matrix}
+    \dot{S}_x\\
+    \dot{S}_y\\
+    \dot{S}_z
+    \end{matrix}\right)
+    &=  
+    \left(\begin{matrix}
+    -\Gamma_2               &  \omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z                      &  -\gamma_{A}b_{SK}K_y                              \\
+    -\omega_0 - \Omega_1 \cos{(\omega_{1} t)}-\gamma_{A}b_{SK}K_z    &  -\Gamma_2                       &  \gamma_{A}b_{SK}K_x \\
+    \gamma_{A}b_{SK}K_y                       &  -\gamma_{A}b_{SK}K_x &  -\Gamma_1 
+    \end{matrix}\right)\cdot
+    \left(\begin{matrix}
+    S_x\\
+    S_y\\
+    S_z
+    \end{matrix}\right) + 
+    \left(\begin{matrix}
+         0  \\
+         0  \\
+         R_{se} 
+    \end{matrix}\right)
+\end{align}
+
+thus,
+
+\begin{align}
+    \dot{S}_+ &= -\Gamma_2 S_x + \left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) S_y - \gamma_{A}b_{SK}K_y S_z\\ &- i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) S_x -i\Gamma_2 S_y + i \gamma_{A}b_{SK}K_x S_z\\
+   \dot{S}_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]S_+ + i \gamma_{A}b_{SK}\left(K_x +i K_y\right) S_z \\ 
+   \dot{S}_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]S_+ + i \gamma_{A}b_{SK}K_+ S_z \\ 
+\end{align}
+
+moving to the oscillating frame of reference $S_+ = A_+ e^{-i\mu_1}$, where $\mu_1 = \frac{\Omega_1}{\omega_1}\sin{\left(\omega_1 t\right)}$ we get
+
+\begin{align}
+    \dot{A}_+ e^{-i\mu_1} - i\dot{\mu}_1e^{-i\mu_1}A_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]A_+ e^{-i\mu_1} + i \gamma_{A}b_{SK}K_+ S_z\\
+    \dot{A}_+ - i\Omega_1 \cos{(\omega_{1} t)}A_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]A_+  + i \gamma_{A}b_{SK}K_+ S_z e^{i\mu_1}\\
+    \dot{A}_+  &= -\left[\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+  + i \gamma_{A}b_{SK}K_+ S_z e^{i\mu_1}
+\end{align}
+
+Now, assume $\omega_0 \gg \Gamma_2^A$ then 
+
+in steady state
+
+\begin{align}
+    A_+  &= \frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right)} e^{i\mu_1}
+\end{align}
+
+
 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
