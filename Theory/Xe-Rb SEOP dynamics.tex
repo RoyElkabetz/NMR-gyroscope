@@ -1069,16 +1069,65 @@ Substituting this expansion back into eq.(\ref{eq:alkali_rotating_frame})
 Next we would like to transform to the Fourier space so it would be easier to do so with the Jacobi–Anger expansion exponential notation, then $\mathcal{F}\left[e^{-in\omega_1 t}\right] = \sqrt{2\pi}\delta \left(\omega - n\omega_1\right)$ and
 
 \begin{align}
-    i\omega A_+\left(\omega\right)  &= \left[-\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+\left(\omega\right)  - i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - n\omega_1\right)\\
+    i\omega A_+\left(\omega\right)  &= \left[-\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+\left(\omega\right)  - i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega + n\omega_1\right)\\
 \end{align}
 
 finally
 
 \begin{align}
-     A_+\left(\omega\right)  &= \frac{-i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0 - \gamma_{A}b_{SK}K_z\right) } \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - n\omega_1\right)
+     A_+\left(\omega\right)  &= \frac{-i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0 - \gamma_{A}b_{SK}K_z\right) } \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega + n\omega_1\right)
 \end{align}
 
-if we swallow the $\gamma_{A}b_{SK}K_z$ term into $\omega_0$, and approximating the expansion by taking only $n=-1, 0, 1$ we get 
+Next we swallow the $\gamma_{A}b_{SK}K_z$ term into $\omega_0$, and placing the $\frac{1}{\omega-\omega_0}$ inside the sum
+
+\begin{align}
+     A_+\left(\omega\right)  &= -i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{\Gamma_2 + i\left(\omega - \omega_0\right)}\\
+      &= -i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{\Gamma_2 + i\left(n\omega_1 - \omega_0\right)}\\
+      &= -\frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2} \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{1 + i\frac{\left(n\omega_1 - \omega_0\right)}{\Gamma_2}}
+\end{align}
+
+Now, if $\omega_1-\omega_0\ll\Gamma_2\ll\omega_0$, we are left only with the $J_{-1}$ term in the sum
+
+\begin{align}
+      A_+\left(\omega\right)&= -\frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2} J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \delta\left(\omega - \omega_1\right)
+\end{align}
+
+back to the time domain
+
+\begin{align}
+      A_+ &= -\frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2} J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)e^{i\omega_1 t}
+\end{align}
+
+going back to the lab frame of reference while keeping only the $n<3$ Bessel terms in the expansion =
+
+\begin{align}
+      A_+ &= -\frac{i \gamma_{A}b_{SK}J_{-1}K_+ S_z}{\Gamma_2} e^{i\omega_1 t}\\
+      S_+ &= -\frac{i \gamma_{A}b_{SK}J_{-1}K_+ S_z}{\Gamma_2}e^{i\omega_1 t}e^{i\mu_1}\\
+      S_+ &= -\frac{i \gamma_{A}b_{SK}J_{-1}K_+ S_z}{\Gamma_2}e^{i\omega_1 t}\left[J_0+ 2i J_{1}\sin{\left(\omega_1 t\right)}+2 J_{2}\cos{\left(2\omega_1 t\right)}\right]
+\end{align}
+
+recall that we only care about the $S_x$ part of the transverse signal 
+
+\begin{align}
+      S_x  +i S_y &= -\frac{i \gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(K_x+iK_y\right)\left(\cos{(\omega_1 t)}+i\sin{(\omega_1 t)}\right)\left[J_0+ 2i J_{1}\sin{\left(\omega_1 t\right)}+2 J_{2}\cos{\left(2\omega_1 t\right)}\right]
+\end{align}
+
+so 
+
+\begin{align}
+      S_x &= -\frac{\gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2} \Bigg[(i)^4 2K_y J_{1}\sin{(\omega_1 t)}\sin{\left(\omega_1 t\right)}\\
+      &+ (i)^2 K_y\cos{(\omega_1 t)}\left(J_0+ 2 J_{2}\cos{\left(2\omega_1 t\right)}\right)\\
+      &+ (i)^2 K_x \sin{(\omega_1 t)}\left(J_0+ 2 J_{2}\cos{\left(2\omega_1 t\right)}\right)\\
+      &+ (i)^2 2K_x\cos{(\omega_1 t)}J_{1}\sin{\left(\omega_1 t\right)}\Bigg]\\
+      S_x &= -\frac{\gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2} \Bigg[ K_y J_{1}\left(1 - \cos{\left(2\omega_1 t\right)}\right)\\
+      &-  \left(J_0K_y\cos{(\omega_1 t)}+  J_{2}K_y\cos{(-\omega_1 t)}+J_{2}K_y\cos{(3\omega_1 t)}\right)\\
+      &-  \left(J_0K_x \sin{(\omega_1 t)}+ J_{2}K_x \sin{(3\omega_1 t)}+ J_{2}K_x \sin{(-\omega_1 t)}\right)\\
+      &- K_x J_{1}\left(\sin{\left(2\omega_1 t\right)}\right)\Bigg]
+\end{align}
+
+
+
+\subsubsection{temporary}
 
 \begin{align}
      A_+\left(\omega\right)  &= \frac{-i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0\right) }\left[ J_0\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega\right)+J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega + \omega_1\right)+J_1\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - \omega_1\right)\right]\\
