@@ -1002,7 +1002,7 @@ where $T_i$ and $T_d$ are the integration and derivative times respectively. We 
 The Block equation for the Alkali (Rb87) spin are given by
 
 \begin{align}
-    \frac{d \mathbf{S}}{d t} &= -\gamma_{A}\left[\left( B_0 + B_1 \cos{(\omega_{1} t)}\right)\hat{z} + b_{SK} \mathbf{K}\right] \times\mathbf{S}  +\Gamma_{se} \left( \mathbf{K} - \mathbf{S}\right) - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{S}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{S}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{S}\right)
+    \frac{d \mathbf{S}}{d t} &= \gamma_{A}\left[\left( B_0 + B_1 \cos{(\omega_{1} t)}\right)\hat{z} + b_{SK} \mathbf{K}\right] \times\mathbf{S}  +\Gamma_{se} \left( \mathbf{K} - \mathbf{S}\right) - \Gamma_2 \hat{x}\left(\hat{x}\cdot \mathbf{S}\right)  - \Gamma_2 \hat{y}\left(\hat{y}\cdot \mathbf{S}\right) -  \Gamma_1 \hat{z}\left(\hat{z}\cdot \mathbf{S}\right)
 \end{align}
 
 In a matrix form
@@ -1015,9 +1015,9 @@ In a matrix form
     \end{matrix}\right)
     &=  
     \left(\begin{matrix}
-    -\Gamma_2               &  \omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z                      &  -\gamma_{A}b_{SK}K_y                              \\
-    -\omega_0 - \Omega_1 \cos{(\omega_{1} t)}-\gamma_{A}b_{SK}K_z    &  -\Gamma_2                       &  \gamma_{A}b_{SK}K_x \\
-    \gamma_{A}b_{SK}K_y                       &  -\gamma_{A}b_{SK}K_x &  -\Gamma_1 
+    -\Gamma_2               &  -\omega_0 - \Omega_1 \cos{(\omega_{1} t)} - \gamma_{A}b_{SK}K_z                      &  \gamma_{A}b_{SK}K_y                              \\
+    \omega_0 + \Omega_1 \cos{(\omega_{1} t)}+\gamma_{A}b_{SK}K_z    &  -\Gamma_2                       &  -\gamma_{A}b_{SK}K_x \\
+    -\gamma_{A}b_{SK}K_y                       &  \gamma_{A}b_{SK}K_x &  -\Gamma_1 
     \end{matrix}\right)\cdot
     \left(\begin{matrix}
     S_x\\
@@ -1034,26 +1034,64 @@ In a matrix form
 thus,
 
 \begin{align}
-    \dot{S}_+ &= -\Gamma_2 S_x + \left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) S_y - \gamma_{A}b_{SK}K_y S_z\\ &- i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) S_x -i\Gamma_2 S_y + i \gamma_{A}b_{SK}K_x S_z\\
-   \dot{S}_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]S_+ + i \gamma_{A}b_{SK}\left(K_x +i K_y\right) S_z \\ 
-   \dot{S}_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]S_+ + i \gamma_{A}b_{SK}K_+ S_z \\ 
+    \dot{S}_+ &= -\Gamma_2 S_x - \left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) S_y + \gamma_{A}b_{SK}K_y S_z\\ &+ i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) S_x -i\Gamma_2 S_y - i \gamma_{A}b_{SK}K_x S_z\\
+   \dot{S}_+ &= \left[-\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]S_+ - i \gamma_{A}b_{SK}\left(K_x +i K_y\right) S_z \\ 
+   \dot{S}_+ &= \left[-\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]S_+ - i \gamma_{A}b_{SK}K_+ S_z \\ 
 \end{align}
 
-moving to the oscillating frame of reference $S_+ = A_+ e^{-i\mu_1}$, where $\mu_1 = \frac{\Omega_1}{\omega_1}\sin{\left(\omega_1 t\right)}$ we get
+moving to the oscillating frame of reference $S_+ = A_+ e^{i\mu_1}$, where $\mu_1 = \frac{\Omega_1}{\omega_1}\sin{\left(\omega_1 t\right)}$ we get
 
 \begin{align}
-    \dot{A}_+ e^{-i\mu_1} - i\dot{\mu}_1e^{-i\mu_1}A_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]A_+ e^{-i\mu_1} + i \gamma_{A}b_{SK}K_+ S_z\\
-    \dot{A}_+ - i\Omega_1 \cos{(\omega_{1} t)}A_+ &= -\left[\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]A_+  + i \gamma_{A}b_{SK}K_+ S_z e^{i\mu_1}\\
-    \dot{A}_+  &= -\left[\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+  + i \gamma_{A}b_{SK}K_+ S_z e^{i\mu_1}
+    \dot{A}_+ e^{i\mu_1} + i\dot{\mu}_1e^{i\mu_1}A_+ &= \left[-\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]A_+ e^{i\mu_1} - i \gamma_{A}b_{SK}K_+ S_z\\
+    \dot{A}_+ + i\Omega_1 \cos{(\omega_{1} t)}A_+ &= \left[-\Gamma_2 + i\left(\omega_0 + \Omega_1 \cos{(\omega_{1} t)} + \gamma_{A}b_{SK}K_z\right) \right]A_+  - i \gamma_{A}b_{SK}K_+ S_z e^{-i\mu_1}\\
+    \dot{A}_+  &= \left[-\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+  - i \gamma_{A}b_{SK}K_+ S_z e^{-i\mu_1}\label{eq:alkali_rotating_frame}
 \end{align}
 
-Now, assume $\omega_0 \gg \Gamma_2^A$ then 
-
-in steady state
+we use the Jacobi–Anger expansion $e^{i z\sin{\left(\theta\right)}}=\sum_{n=-\infty}^{\infty}J_n\left(z\right)e^{i n \theta}$, using the Bessel function relation $J_{-n}(z) = (-1)^n J_n(z)$ 
 
 \begin{align}
-    A_+  &= \frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right)} e^{i\mu_1}
+    e^{\pm i z\sin{\left(\theta\right)}} &= J_0\left(z\right)\pm 2i\sum_{n=0}^{\infty} J_{2n+1}\left(z\right)\sin{\left(\left(2n+1\right)\theta\right)}+2\sum_{n=1}^{\infty} J_{2n}\left(z\right)\cos{\left(2n\theta\right)} 
 \end{align}
+
+so finally
+
+
+\begin{align}
+        e^{-i\mu_1} = J_0\left(\frac{\Omega_1}{\omega_1}\right)+ 2i J_{1}\left(\frac{\Omega_1}{\omega_1}\right)\sin{\left(\omega_1 t\right)}+2 J_{2}\left(\frac{\Omega_1}{\omega_1}\right)\cos{\left(2\omega_1 t\right)}+\dots
+\end{align}
+
+Substituting this expansion back into eq.(\ref{eq:alkali_rotating_frame})
+
+\begin{align}
+    \dot{A}_+  &= \left[-\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+ \\ &- i \gamma_{A}b_{SK}K_+ S_z \left[J_0\left(\frac{\Omega_1}{\omega_1}\right)+ 2i J_{1}\left(\frac{\Omega_1}{\omega_1}\right)\sin{\left(\omega_1 t\right)}+2 J_{2}\left(\frac{\Omega_1}{\omega_1}\right)\cos{\left(2\omega_1 t\right)}+\dots\right]
+\end{align}
+ 
+Next we would like to transform to the Fourier space so it would be easier to do so with the Jacobi–Anger expansion exponential notation, then $\mathcal{F}\left[e^{-in\omega_1 t}\right] = \sqrt{2\pi}\delta \left(\omega - n\omega_1\right)$ and
+
+\begin{align}
+    i\omega A_+\left(\omega\right)  &= \left[-\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right) \right]A_+\left(\omega\right)  - i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - n\omega_1\right)\\
+\end{align}
+
+finally
+
+\begin{align}
+     A_+\left(\omega\right)  &= \frac{-i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0 - \gamma_{A}b_{SK}K_z\right) } \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - n\omega_1\right)
+\end{align}
+
+if we swallow the $\gamma_{A}b_{SK}K_z$ term into $\omega_0$, and approximating the expansion by taking only $n=-1, 0, 1$ we get 
+
+\begin{align}
+     A_+\left(\omega\right)  &= \frac{-i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0\right) }\left[ J_0\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega\right)+J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega + \omega_1\right)+J_1\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - \omega_1\right)\right]\\
+     &= \frac{-i \sqrt{2\pi}\gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0\right) }\left[ J_0\left(\frac{\Omega_1}{\omega_1}\right)\delta \left(\omega\right)+J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)\left[\delta \left(\omega + \omega_1\right)-\delta \left(\omega - \omega_1\right)\right]\right]
+\end{align}
+
+% Now, assume $\omega_0 \gg \Gamma_2^A$ then 
+
+% in steady state
+
+% \begin{align}
+%     A_+  &= \frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right)} e^{i\mu_1}
+% \end{align}
 
 
 
