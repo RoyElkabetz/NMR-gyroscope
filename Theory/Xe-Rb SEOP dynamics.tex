@@ -1083,7 +1083,7 @@ Next we swallow the $\gamma_{A}b_{SK}K_z$ term into $\omega_0$, and placing the 
 \begin{align}
      A_+\left(\omega\right)  &= -i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{\Gamma_2 + i\left(\omega - \omega_0\right)}\\
       &= -i \gamma_{A}b_{SK}K_+ S_z \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{\Gamma_2 + i\left(n\omega_1 - \omega_0\right)}\\
-      &= -\frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2} \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{1 + i\frac{\left(n\omega_1 - \omega_0\right)}{\Gamma_2}}
+      &= -\frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2} \sum_{n=-\infty}^{\infty}J_n\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi} \frac{\delta\left(\omega + n\omega_1\right)}{1 + i\frac{\left(n\omega_1 - \omega_0\right)}{\Gamma_2}}\label{eq:alkali_esr_frame}
 \end{align}
 
 Now, if $\omega_1-\omega_0\ll\Gamma_2\ll\omega_0$, we are left only with the $J_{-1}$ term in the sum
@@ -1109,7 +1109,7 @@ going back to the lab frame of reference while keeping only the $n<3$ Bessel ter
 recall that we only care about the $S_x$ part of the transverse signal 
 
 \begin{align}
-      S_x  +i S_y &= -\frac{i \gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(K_x+iK_y\right)\left(\cos{(\omega_1 t)}+i\sin{(\omega_1 t)}\right)\left[J_0+ 2i J_{1}\sin{\left(\omega_1 t\right)}+2 J_{2}\cos{\left(2\omega_1 t\right)}\right]
+      S_x  +i S_y &= -\frac{i \gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(K_x+i K_y\right)\left(\cos{(\omega_1 t)}+i\sin{(\omega_1 t)}\right)\left[J_0+ 2i J_{1}\sin{\left(\omega_1 t\right)}+2 J_{2}\cos{\left(2\omega_1 t\right)}\right]\label{eq:transverse_alkali_lab_frame}
 \end{align}
 
 so 
@@ -1125,13 +1125,52 @@ so
       &- K_x J_{1}\left(\sin{\left(2\omega_1 t\right)}\right)\Bigg]
 \end{align}
 
-Next, assuming Lock-in detection of $S_x$ with a reference signal $\cos{\left(\omega_1 t+\alpha\right)}$
+Next, assuming Lock-in detection of $S_x$ with a reference signal $\cos{\left(\omega_1 t+\alpha\right)}$, then every term which is factored with a sine / cosine function (after using trigonometric product$\to$sum identities) will be averaged out to zero, such that we are left with the next relation
 
 \begin{align}
-      \left<S_x\cos{\left(\omega_1 t+\alpha\right)}\right> &= -\frac{\gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2} \Bigg[ K_y J_{1}\left(1 - \cos{\left(2\omega_1 t\right)}\right)\\
-      &-  K_y\left(J_0\cos{(\omega_1 t)}+  J_{2}\cos{(-\omega_1 t)}+J_{2}\cos{(3\omega_1 t)}\right)\\
-      &-  K_x\left(J_0 \sin{(\omega_1 t)}+ J_{2} \sin{(3\omega_1 t)}+ J_{2} \sin{(-\omega_1 t)}\right)\\
-      &- K_x J_{1}\left(\sin{\left(2\omega_1 t\right)}\right)\Bigg]
+      \left<S_x\cos{\left(\omega_1 t+\alpha\right)}\right> &= \frac{\gamma_{A}b_{SK}J_{-1} S_z}{2\Gamma_2} \left[ K_y\cos{(\alpha)}\left(J_0+  J_{2}\right) + K_x\sin{(\alpha)}\left(-J_0 + J_{2} \right)\right]\label{eq:lockin_zero_order}
+\end{align}
+
+which is the same Lock-in relation put out in \cite{walker2016spin}. We can get a less course Lock-in relation by returning back to eq.(\ref{eq:alkali_esr_frame}) and keeping another term in the approximation, such that we take
+
+\begin{align}
+    \frac{1}{1 + i\frac{\left(n\omega_1 - \omega_0\right)}{\Gamma_2}} \approx 1 - i\frac{\left(n\omega_1 - \omega_0\right)}{\Gamma_2}
+\end{align}
+
+then, assigning eq.(\ref{eq:lockin_zero_order}) with $S_x^{(0)}$, let us calculate the additional term to $S_x=S_x^{(0)}+S_x^{(1)}$ using eq.(\ref{eq:transverse_alkali_lab_frame}))
+
+\begin{align}
+      S_x^{(1)}  +i S_y^{(1)} &= -\frac{ \gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right)\left(K_x+i K_y\right)\left(\cos{(\omega_1 t)}+i\sin{(\omega_1 t)}\right)\left[J_0+ 2i J_{1}\sin{\left(\omega_1 t\right)}+2 J_{2}\cos{\left(2\omega_1 t\right)}\right]
+\end{align}
+
+we need only $S_x^{(1)}$
+
+\begin{align}
+      S_x^{(1)} &= -\frac{\gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \Bigg[ (i)^2 K_y\cos{(\omega_1 t)}2 J_{1}\sin{\left(\omega_1 t\right)}\\
+      &+ (i)^2 K_y \sin{(\omega_1 t)}\left(J_0+ 2 J_{2}\cos{\left(2\omega_1 t\right)}\right)\\
+      &+ (i)^2 K_x \sin{(\omega_1 t)}2 J_{1}\sin{\left(\omega_1 t\right)}\\
+      &+ K_x \cos{(\omega_1 t)}\left(J_0+ 2 J_{2}\cos{\left(2\omega_1 t\right)}\right)\Bigg]\\
+      S_x^{(1)} &= \frac{\gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \Bigg[ 2 J_{1}K_y\cos{(\omega_1 t)}\sin{\left(\omega_1 t\right)}\\
+      &+  K_y \sin{(\omega_1 t)}\left(J_0+ 2 J_{2}\cos{\left(2\omega_1 t\right)}\right)\\
+      &+  2 J_{1}K_x \sin{(\omega_1 t)}\sin{\left(\omega_1 t\right)}\\
+      &- K_x \cos{(\omega_1 t)}\left(J_0+ 2 J_{2}\cos{\left(2\omega_1 t\right)}\right)\Bigg]\\
+      S_x^{(1)} &= \frac{\gamma_{A}b_{SK}J_{-1} S_z}{\Gamma_2}\left(\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \Bigg[ J_{1}K_y\sin{(2\omega_1 t)}\\
+      &+  K_y \left(J_0\sin{(\omega_1 t)}+ J_{2}\sin{(3\omega_1 t)}+J_{2}\sin{\left(-\omega_1 t\right)}\right)\\
+      &+  J_{1}K_x \left(1 - \cos{\left(2\omega_1 t\right)}\right)\\
+      &- K_x \left(J_0\cos{(\omega_1 t)}+  J_{2}\cos{(-\omega_1 t)}+ J_{2}\cos{\left(3\omega_1 t\right)}\right)\Bigg]
+\end{align}
+
+Computing the addition to the Lock-in measurement
+
+\begin{align}
+      \left<S_x^{(1)}\cos{\left(\omega_1 t+\alpha\right)}\right> &= \frac{\gamma_{A}b_{SK}J_{-1} S_z}{2\Gamma_2}\left(\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \left[K_y\sin{(\alpha)} \left(-J_0+J_{2}\right)- K_x \cos{(\alpha)}\left(J_0+  J_{2}\right)\right]
+\end{align}
+
+finally, putting all together 
+
+\begin{align}
+      \left<\left(S_x^{(0)}+S_x^{(1)}\right)\cos{\left(\omega_1 t+\alpha\right)}\right> &= \frac{\gamma_{A}b_{SK}J_{-1} S_z}{2\Gamma_2} \bigg[\left(K_x + K_y \frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right)\sin{(\alpha)}\left(-J_0+J_{2}\right) \\
+      &+ \left(K_y- K_x\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \cos{(\alpha)}\left(J_0+  J_{2}\right)\bigg]
 \end{align}
 
 \subsubsection{temporary}
