@@ -1170,15 +1170,16 @@ finally, putting all together
 
 \begin{align}
       \left<\left(S_x^{(0)}+S_x^{(1)}\right)\cos{\left(\omega_1 t+\alpha\right)}\right> &= \frac{\gamma_{A}b_{SK}J_{-1} S_z}{2\Gamma_2} \bigg[\left(K_x + K_y \frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right)\sin{(\alpha)}\left(-J_0+J_{2}\right) \\
-      &+ \left(K_y- K_x\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \cos{(\alpha)}\left(J_0+  J_{2}\right)\bigg]
+      &+ \left(K_y- K_x\frac{\left(\omega_1 - \omega_0\right)}{\Gamma_2}\right) \cos{(\alpha)}\left(J_0+  J_{2}\right)\bigg]\label{eq:lockin_zero_first_order_sx}
 \end{align}
 
-\subsubsection{temporary}
+In an on resonance working point $\omega_1=\omega_0$, and the measured signal would be
 
 \begin{align}
-     A_+\left(\omega\right)  &= \frac{-i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0\right) }\left[ J_0\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega\right)+J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega + \omega_1\right)+J_1\left(\frac{\Omega_1}{\omega_1}\right)\sqrt{2\pi}\delta \left(\omega - \omega_1\right)\right]\\
-     &= \frac{-i \sqrt{2\pi}\gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega - \omega_0\right) }\left[ J_0\left(\frac{\Omega_1}{\omega_1}\right)\delta \left(\omega\right)+J_{-1}\left(\frac{\Omega_1}{\omega_1}\right)\left[\delta \left(\omega + \omega_1\right)-\delta \left(\omega - \omega_1\right)\right]\right]
+      \left<\left(S_x^{(0)}+S_x^{(1)}\right)\cos{\left(\omega_1 t+\alpha\right)}\right> &= \frac{\gamma_{A}b_{SK}J_{0}J_{-1} S_z}{\Gamma_2} K_y \cos{(\alpha)}
 \end{align}
+
+\section{Balanced Photo Diode}
 
 % Now, assume $\omega_0 \gg \Gamma_2^A$ then 
 
