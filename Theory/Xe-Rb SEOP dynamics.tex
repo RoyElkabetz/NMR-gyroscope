@@ -1179,18 +1179,97 @@ In an on resonance working point $\omega_1=\omega_0$, and the measured signal wo
       \left<\left(S_x^{(0)}+S_x^{(1)}\right)\cos{\left(\omega_1 t+\alpha\right)}\right> &= \frac{\gamma_{A}b_{SK}J_{0}J_{-1} S_z}{\Gamma_2} K_y \cos{(\alpha)}
 \end{align}
 
-\section{Balanced Photo Diode}
+\newpage
+\section{Balanced Photo Diode Measurement}
+In this section we will describe a Faraday Rotation measurement technique using a Balanced Photo Diode (BPD) with a Polarized Beam Splitter (PBS). The optical setup is illustrated in Fig.\ref{fig:BPD_scheme}. 
 
-% Now, assume $\omega_0 \gg \Gamma_2^A$ then 
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{Theory/Figures/BPD_scheme.png}
+\caption{Faraday Rotation measurement optical setup using a PBS with a BPD.}
+\label{fig:BPD_scheme}
+\end{figure}
 
-% in steady state
+We start by stating the frames of reference that we are going to use in the following computation. The PBS frame is described by $(\hat{x}, \hat{y})$, while the laser polarization frame described by $(\hat{\epsilon}_1, \hat{\epsilon}_2)$ with the following transformation 
 
-% \begin{align}
-%     A_+  &= \frac{i \gamma_{A}b_{SK}K_+ S_z}{\Gamma_2 + i\left(\omega_0 + \gamma_{A}b_{SK}K_z\right)} e^{i\mu_1}
-% \end{align}
+\begin{align}
+    \left\{ 
+  \begin{array}{ c l }
+    \mathbf{\hat{\epsilon}}_1 &= \cos{\theta}\mathbf{\hat{x}}+\sin{\theta}\mathbf{\hat{y}} \\
+    \mathbf{\hat{\epsilon}}_2 &= -\sin{\theta}\mathbf{\hat{x}}+\cos{\theta}\mathbf{\hat{y}}
+  \end{array}
+ \right.\label{laser_PBS_transformation}
+\end{align}
 
+the transformation is illustrated in Fig.\ref{fig:BPD_frame}.
 
+\begin{figure}
+\centering
+\includegraphics[width=0.3\textwidth]{Theory/Figures/BPD_frame.png}
+\caption{Laser to PBS frame of reference transformation.}
+\label{fig:BPD_frame}
+\end{figure}
 
+The Laser's electromagnetic field is given by 
+
+\begin{align}
+    \mathbf{E}_{\text{Laser}}\left(z, t\right) &= E_0\left(\alpha\mathbf{\hat{\epsilon}}_1+e^{i\delta}\beta\mathbf{\hat{\epsilon}}_2\right)e^{i\left(k z-\omega t\right)}\label{eq:laser_in_laser_frame}
+\end{align}
+
+where $\lbrace E_0, \alpha, \beta, \delta \rbrace \in \mathbb{R}$. Next we use the transformation in (\ref{laser_PBS_transformassion}) to describe the laser polarization in the frame of reference of the PBS. Therefore eq.(\ref{eq:laser_in_laser_frame}) become
+
+\begin{align}
+    \mathbf{E}_{\textbf{Laser}}\left(z, t\right) &= E_0\left[\alpha\cos{\theta}\mathbf{\hat{x}}+\alpha\sin{\theta}\mathbf{\hat{y}}-\beta e^{i\delta}\sin{\theta}\mathbf{\hat{x}}+\beta e^{i\delta}\cos{\theta}\mathbf{\hat{y}}\right]e^{i\left(k z-\omega t\right)}\\
+    &=E_0\left[\left(\alpha\cos{\theta}-\beta e^{i\delta}\sin{\theta} \right)\mathbf{\hat{x}}+\left(\alpha\sin{\theta}+\beta e^{i\delta}\cos{\theta}\right)\mathbf{\hat{y}}\right]e^{i\left(k z-\omega t\right)}
+    \label{eq:laser_in_laser_frame}
+\end{align}
+
+Next we define the PBS transmission matrix as follows
+
+\begin{align}
+\mathbf{T} &= \left[ 
+    \begin{array}{cc}
+        \frac{1}{2} - \epsilon & 0 \\
+        0 & \frac{1}{2} + \epsilon
+    \end{array}
+    \right]
+\end{align}
+ where we have a $50-50$ transmission-reflection up to a small $\epsilon\ll 1$. Therefore, the electromagnetic field after the PBS is given by
+ 
+ \begin{align}
+    \left\{
+     \begin{array}{c l}
+         \mathbf{E}_1 =& \left(\mathbf{T}\mathbf{E}_{\text{Laser}}\cdot \hat{x}\right)\hat{x}  = E_0 \left[\alpha\cos{\theta -e^{i\delta}\beta\sin{\theta}}\right]\left(\frac{1}{2}-\epsilon\right)\hat{x}\\
+         \mathbf{E}_2 =& \left(\mathbf{T}\mathbf{E}_{\text{Laser}}\cdot \hat{y}\right)\hat{y}  = E_0 \left[\alpha\sin{\theta +e^{i\delta}\beta\cos{\theta}}\right]\left(\frac{1}{2}+\epsilon\right)\hat{y}
+     \end{array}
+    \right.
+ \end{align}
+ 
+ Now let us calculate the laser intensity measured in the RF channel of the BPD, which is given by $I_{RF}=I_{1}-I_{2}$, thus
+ 
+ \begin{align}
+     I_{RF} &= I_1 - I_2\\
+            &\propto \mathbf{E}_1\cdot \mathbf{E}_1 - \mathbf{E}_2\cdot \mathbf{E}_2\\
+            &= E_0^2 \left[\alpha^2\cos^2\theta+\beta^2\sin^2\theta - 2\alpha\beta\cos{\theta}\sin{\theta}\cos{\delta}\right]\left(\frac{1}{2}-\epsilon\right)^2\\
+            &\quad- E_0^2\left[\alpha^2\sin^2\theta+\beta^2\cos^2\theta + 2\alpha\beta\cos{\theta}\sin{\theta}\cos{\delta}\right]\left(\frac{1}{2}+\epsilon\right)^2\\
+            &= E_0^2 \left[\left(\alpha^2-\beta^2\right)\left(\cos^2\theta - \sin^2\theta\right)\left(\frac{1}{4}+\epsilon^2\right) - \left(\alpha^2+\beta^2\right)\epsilon - 4\alpha\beta\cos{\theta}\sin{\theta}\cos{\delta}\left(\frac{1}{4} + \epsilon^2\right)\right]\\
+            &= E_0^2 \left[\left[\left(\alpha^2-\beta^2\right)\left(\cos^2\theta - \sin^2\theta\right) - 4\alpha\beta\cos{\theta}\sin{\theta}\cos{\delta}  \right]\left(\frac{1}{4}+\epsilon^2\right) - \left(\alpha^2+\beta^2\right)\epsilon \right]\\
+            &= E_0^2 \left[\left[\left(\alpha^2-\beta^2\right)\left(\cos{\left(2\theta\right)}\right) - 2\alpha\beta\sin{\left(2\theta\right)}\cos{\delta}  \right]\left(\frac{1}{4}+\epsilon^2\right) - \left(\alpha^2+\beta^2\right)\epsilon \right]\\
+            &\overset{\epsilon\ll1}{=} E_0^2 \left[\left[\left(\alpha^2-\beta^2\right)\left(\cos{\left(2\theta\right)}\right) - 2\alpha\beta\sin{\left(2\theta\right)}\cos{\delta}  \right]\frac{1}{4} - \left(\alpha^2+\beta^2\right)\epsilon \right]\\
+            &= \boxed{\frac{E_0^2}{4} \left[\left(\alpha^2-\beta^2\right)\left(\cos{\left(2\theta\right)}\right) - 2\alpha\beta\sin{\left(2\theta\right)}\cos{\delta}  - 4\left(\alpha^2+\beta^2\right)\epsilon \right]}\label{eq:rf_signal}
+ \end{align}
+ 
+ Now let us analyze eq.(\ref{eq:rf_signal}). The left term corresponds to the laser polarization in the laser frame of reference. If $\alpha^2=\beta^2$ the laser polarization prime axis would be at $45^{\circ}$ (in the laser frame of reference) and this term would be zero. The middle term is the \emph{real} RF signal, $\delta$ would be the amount of laser circular polarization. For $\delta=0$ we get laser light with linear polarization and then the RF signal corresponds to twice the polarization angle of incidence. The right term corresponds to the quality of the PBS, where for a perfect PBS we get 50-50 transmission-reflection with $\epsilon=0$ and this term would be also zero.
+ 
+ Finally, for a perfect PBS, and perfectly linear laser polarization at $45^{\circ}$ (in the laser frame of reference), the RF signal would be
+ 
+ \begin{align}
+     \boxed{I_{RF} = -\frac{E_0^2}{2} \sin{\left(2\theta\right)}}\label{eq:perfect_RF_signal}
+ \end{align}
+ 
+ 
+ 
+ 
 \bibliographystyle{alpha}
 \bibliography{my_bib}
 
